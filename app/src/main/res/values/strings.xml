@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PokeBox</string>
+    <string name="card_viewer_fragment">Card Viewer Fragment</string>
+    <string name="scanner_fragment">Scanner Fragment</string>
+    <string name="settings_fragment">Settings Fragment</string>
+    <string name="watchlist_fragment">Watchlist Fragment</string>
 </resources>
