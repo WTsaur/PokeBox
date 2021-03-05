@@ -3,10 +3,13 @@ package edu.fsu.cs.PokeBox;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,6 +26,9 @@ private Camera camera;
                 R.layout.fragment_scanner, container, false);
             camera = getCameraInstance();
 
+        //setting the camera capture button
+        ImageButton capture = (ImageButton) view.findViewById(R.id.capture);
+        capture.setImageResource(R.drawable.camera_capture);
 
 
 

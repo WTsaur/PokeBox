@@ -3,9 +3,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/scanner_fragment"
-              android:layout_centerHorizontal="true"
-              android:layout_centerVertical="true"/>
+
+    <FrameLayout
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="594dp"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/capture"
+            android:layout_width="77dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginRight="130dp"
+            android:layout_marginBottom="2dp"
+            android:background="#0000"
+            android:scaleType="fitCenter"
+            android:text="Capture" />
+
+
+    </FrameLayout>
+
 
 </RelativeLayout>
