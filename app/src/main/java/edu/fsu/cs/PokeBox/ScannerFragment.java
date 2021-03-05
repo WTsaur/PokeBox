@@ -24,11 +24,16 @@ private Camera camera;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(
                 R.layout.fragment_scanner, container, false);
+        if(checkCameraHardware(getContext())) {
             camera = getCameraInstance();
 
-        //setting the camera capture button
-        ImageButton capture = (ImageButton) view.findViewById(R.id.capture);
-        capture.setImageResource(R.drawable.camera_capture);
+
+            //setting the camera capture button
+            ImageButton capture = (ImageButton) view.findViewById(R.id.capture);
+            capture.setImageResource(R.drawable.camera_capture);
+        }
+
+
 
 
 
