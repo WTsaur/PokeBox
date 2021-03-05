@@ -3,7 +3,12 @@ package edu.fsu.cs.PokeBox;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -21,10 +26,25 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.settings_tab_icon
     };
 
+    private void requestCameraPermission() {
+        String permission = Manifest.permission.CAMERA;
+        int grant = ContextCompat.checkSelfPermission(this, permission);
+        if ( grant != PackageManager.PERMISSION_GRANTED) {
+            String[] permission_list = new String[2];
+            permission_list[0] = permission;
+            ActivityCompat.requestPermissions(this, permission_list, 1);
+        }
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        requestCameraPermission();
+
+
 
         ViewPager2 viewPager = findViewById(R.id.pager);
         TabLayout tabLayout = findViewById(R.id.navigation_tabs);
