@@ -1,31 +1,42 @@
 package edu.fsu.cs.PokeBox;
 
-import android.content.Context;
+import android.Manifest;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import java.io.IOException;
-
-import static android.content.ContentValues.TAG;
+import java.util.Objects;
+import java.util.Vector;
 
 public class ScannerFragment extends Fragment {
-View view;
-private Camera camera;
-private CameraPreview mPreview;
+
+    // Storage/Camera Permissions
+    private static final int REQUEST_PERMS = 1;
+    private static final String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
+
+    private static final int CAMERA_LAUNCH_REQUEST = 1348;
+
+    View view;
+    private ImageView imageView;
+    private Button startCamera;
+    private Uri image_uri;
 
     @Nullable
     @Override
@@ -33,99 +44,89 @@ private CameraPreview mPreview;
         view = inflater.inflate(
                 R.layout.fragment_scanner, container, false);
 
-        //if device has a camera, open an instance, set the capture button and set the preview
-        if(checkCameraHardware(getContext())) {
-            camera = getCameraInstance();
+        //set up fragment background
+        imageView = view.findViewById(R.id.camera_background);
 
-            //setting the camera capture button
-            ImageButton capture = view.findViewById(R.id.capture);
-            capture.setImageResource(R.drawable.camera_capture);
-
-            // Create our Preview view and set it as the content of our activity.
-            mPreview = new CameraPreview(getContext(), camera);
-            FrameLayout preview = view.findViewById(R.id.camera);
-            preview.addView(mPreview);
-
-
-        }
-
+        //set up camera launcher button
+        startCamera = view.findViewById(R.id.capture);
+        startCamera.setOnClickListener(v -> {
+            int permCheck = 0;
+            for (String permission : PERMISSIONS) {
+                int permStatus = ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), permission);
+                permCheck += permStatus;
+            }
+            if (permCheck != 0) {
+                requestPermissions();
+            } else {
+                launchCamera();
+            }
+        });
         return view;
     }
 
-    private boolean checkCameraHardware(Context context) {
-        //checking if device has a camera
-        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    private void requestPermissions() {
+        Vector<String> v = new Vector<>();
+        for (String permission : PERMISSIONS) {
+            int status = ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), permission);
+            if (status != PackageManager.PERMISSION_GRANTED) {
+                v.add(permission);
+            }
+        }
+        String[] permission_list = new String[v.size()];
+        for (int i = 0; i < v.size(); i++) {
+            permission_list[i] = v.get(i);
+        }
+        ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), permission_list, REQUEST_PERMS);
     }
 
-    public static Camera getCameraInstance(){
-        Camera c = null;
-        try {
-            c = Camera.open();
-        }
-        catch (Exception e){
-        }
-
-        //returning camera
-        return c;
+    private void launchCamera() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "PokeBox Card Scan");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera Fragment");
+        image_uri = Objects.requireNonNull(getContext()).getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(cameraIntent, CAMERA_LAUNCH_REQUEST);
     }
 
-
-
-    public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
-        private final SurfaceHolder mHolder;
-        private final Camera mCamera;
-
-        public CameraPreview(Context context, Camera camera) {
-            super(context);
-            mCamera = camera;
-
-            // Install a SurfaceHolder.Callback
-            mHolder = getHolder();
-            mHolder.addCallback(this);
-            // required for Android version 3.0+
-            mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        }
-
-        public void surfaceCreated(SurfaceHolder holder) {
-            // Start the preview with the surface created
-            try {
-                mCamera.setPreviewDisplay(holder);
-                mCamera.startPreview();
-            } catch (IOException e) {
-                Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMS) {
+            int check = 0;
+            for (int i = 0; i < permissions.length; i++) {
+                check += grantResults[i];
+            }
+            if (check == 0) {
+                launchCamera();
+            } else {
+                Toast.makeText(getContext(), "Some permissions were denied", Toast.LENGTH_LONG).show();
             }
         }
+    }
 
-        public void surfaceDestroyed(SurfaceHolder holder) {
-            //releasing camera in activity
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_LAUNCH_REQUEST && resultCode == Activity.RESULT_OK) {
+            
+            startCamera.setEnabled(false);
+            startCamera.setText("Processing Photo...");
+
+            // process photo
+            processPhoto();
+
+            startCamera.setEnabled(true);
+            startCamera.setText(R.string.camera_launch_button_text);
         }
+    }
 
-        //for making changes on the preview
-        public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+    private void processPhoto() {
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-            if (mHolder.getSurface() == null){
-                // preview surface does not exist
-                return;
-            }
+        // process image
 
-            // stop preview before making changes
-            try {
-                mCamera.stopPreview();
-            } catch (Exception e){
-            }
+        imageView.setImageURI(image_uri);
 
-            // set any preview change
-
-
-
-            // start preview with new settings
-            try {
-                mCamera.setPreviewDisplay(mHolder);
-                mCamera.startPreview();
-
-            } catch (Exception e){
-                Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-            }
-        }
     }
 }

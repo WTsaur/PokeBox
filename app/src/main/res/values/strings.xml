@@ -4,4 +4,6 @@
     <string name="scanner_fragment">Scanner Fragment</string>
     <string name="settings_fragment">Settings Fragment</string>
     <string name="watchlist_fragment">Watchlist Fragment</string>
+    <string name="background_for_camera_fragment">background for camera fragment</string>
+    <string name="camera_launch_button_text">Scan a Card!</string>
 </resources>
