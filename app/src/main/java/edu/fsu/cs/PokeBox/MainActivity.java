@@ -15,8 +15,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
 
     // list of icons used for page navigation bar
     private final int[] icons = {
@@ -43,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         requestCameraPermission();
+  //      mAuth = FirebaseAuth.getInstance();           //for user authentication
 
+        //need to implement: If user is not logged in, show the login page. Else show activity_main.
+        //for login: if register is clicked, show the registration form.
+        //for registration: if login is clicked, show the login page.
+        //if login btn is clicked in the login page, let user in and show the activity_main
 
 
         ViewPager2 viewPager = findViewById(R.id.pager);
@@ -56,6 +64,19 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setIcon(icons[position])).attach();
     }
 
+
+    //Work in progress: user authentication
+/*
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            reload();
+        }
+    }
+*/
     // Fragment Adaptor class for View Pager
     private class ViewPagerFragmentAdaptor extends FragmentStateAdapter {
 
