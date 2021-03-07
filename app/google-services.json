@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "712983907468",
+    "project_id": "pokebox-d84a2",
+    "storage_bucket": "pokebox-d84a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712983907468:android:fd4695b80d80d5e740ffa9",
+        "android_client_info": {
+          "package_name": "edu.fsu.cs.PokeBox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712983907468-3g3efrpsv9vfq1b1aa47o4u0qar6c4ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI19JQo2QNx0WgPkKWkOiAF3-jBYpFzh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712983907468-3g3efrpsv9vfq1b1aa47o4u0qar6c4ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
