@@ -1,7 +1,6 @@
 # PokeBox
 ![PokeBox App Icon](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/PokeBox-icon-app.png)
 ## Created by William Tsaur and Tommy Chong
-#
 ## Progress Report 1
 ### Contributions
 - William Tsaur
