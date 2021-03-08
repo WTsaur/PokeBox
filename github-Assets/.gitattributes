@@ -1,0 +1,5 @@
+pokebox-camera.jpg filter=lfs diff=lfs merge=lfs -text
+pokebox-cards.jpg filter=lfs diff=lfs merge=lfs -text
+pokebox-settings.jpg filter=lfs diff=lfs merge=lfs -text
+pokebox-watchlist.jpg filter=lfs diff=lfs merge=lfs -text
+git-pokebox-app-icon.png filter=lfs diff=lfs merge=lfs -text
