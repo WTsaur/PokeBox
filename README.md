@@ -5,7 +5,7 @@
 ### Contributions
 - William Tsaur
     - Basic Layout using ViewPager2, TabLayout, and fragments
-    - fixed and modified basic camera functionality for camera fragment
+    - Fixed and modified basic camera functionality for camera fragment
     - Created Image Assets and Vector assets for the app logo, tabLayout, and camera fragment background
     - Created markdown document
 - Tommy Chong
