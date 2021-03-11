@@ -20,6 +20,7 @@
 > completion where it can be displayed. Below you will find images of the current states of each page as well as a short GIF
 > that shows a demo of the application running.
 #### Camera Page
+![camera](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/pokebox-camera.jpg)
 ![scanner example](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/pokebox-scanner-example.jpg)
 #### Cards Page
 ![cards](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/pokebox-cards.jpg)
