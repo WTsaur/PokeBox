@@ -8,6 +8,7 @@
     - Fixed and modified basic camera functionality for camera fragment
     - Created Image Assets and Vector assets for the app logo, tabLayout, and camera fragment background
     - Created markdown document
+    - Implemented image recognition using Google's ML Kit text recognizer
 - Tommy Chong
     - Implemented basic camera functionality for camera fragment
     - Began implementation of user login and registration with FireBase
