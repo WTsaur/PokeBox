@@ -17,7 +17,13 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import com.google.android.gms.tasks.Task;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -37,12 +43,15 @@ public class ScannerFragment extends Fragment {
     private ImageView imageView;
     private Button startCamera;
     private Uri image_uri;
+    private TextView resView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(
                 R.layout.fragment_scanner, container, false);
+
+        resView = view.findViewById(R.id.scanResult);
 
         //set up fragment background
         imageView = view.findViewById(R.id.camera_background);
@@ -125,6 +134,32 @@ public class ScannerFragment extends Fragment {
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         // process image
+        InputImage img;
+        try {
+            img = InputImage.fromFilePath(Objects.requireNonNull(getContext()), image_uri);
+
+            TextRecognizer recognizer = TextRecognition.getClient();
+            // Task failed with exception
+            Task<Text> result = recognizer.process(img).addOnSuccessListener(text -> {
+                // Task completed successfully
+                resView.setVisibility(View.VISIBLE);
+                resView.setBackgroundColor(getResources().getColor(R.color.black));
+                resView.setText(text.getText());
+//                    for (Text.TextBlock block : text.getTextBlocks()) {
+//                        String blockText = block.getText();
+//                        for (Text.Line line : block.getLines()) {
+//                            String lineText = line.getText();
+//                            for (Text.Element element: line.getElements()) {
+//                                String elementText = element.getText();
+//                                Toast.makeText(getContext(), elementText, Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    }
+
+            }).addOnFailureListener(Throwable::printStackTrace);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
 
         imageView.setImageURI(image_uri);
 
