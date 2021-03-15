@@ -88,13 +88,11 @@ public class MainActivity extends AppCompatActivity {
                                         catch (FirebaseAuthInvalidUserException invalidEmail)
                                         {
                                             Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_LONG).show();
-                                            // TODO: take your actions!
                                         }
                                         // if user enters wrong password.
                                         catch (FirebaseAuthInvalidCredentialsException wrongPassword)
                                         {
                                             Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_LONG).show();
-                                            // TODO: Take your action
                                         }
                                         catch (Exception e)
                                         {

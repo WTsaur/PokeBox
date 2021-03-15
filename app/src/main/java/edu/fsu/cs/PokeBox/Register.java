@@ -62,22 +62,21 @@ public class Register extends MainActivity {
                                                 {
                                                     throw task.getException();
                                                 }
-                                                // if user enters wrong email.
+                                                // if user enters weak password
                                                 catch (FirebaseAuthWeakPasswordException weakPassword)
                                                 {
                                                     Toast.makeText(Register.this, "Weak password", Toast.LENGTH_LONG).show();
-                                                    // TODO: take your actions!
                                                 }
-                                                // if user enters wrong password.
+
+                                                // if user enters wrong email.
                                                 catch (FirebaseAuthInvalidCredentialsException malformedEmail)
                                                 {
                                                     Toast.makeText(Register.this, "Invalid Email", Toast.LENGTH_LONG).show();
-                                                    // TODO: Take your action
                                                 }
+                                                // if user enters existing email.
                                                 catch (FirebaseAuthUserCollisionException existEmail)
                                                 {
                                                     Toast.makeText(Register.this, "Email already exists" , Toast.LENGTH_LONG).show();
-                                                    // TODO: Take your action
                                                 }
                                                 catch (Exception e)
                                                 {
