@@ -57,7 +57,7 @@
         android:layout_below="@+id/cpassword"
         android:layout_marginTop="19dp"
         android:layout_marginLeft="148dp"
-        android:text="Login" />
+        android:text="Register" />
 
     <TextView
         android:id="@+id/existinguser"

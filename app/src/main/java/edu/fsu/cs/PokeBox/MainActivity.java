@@ -4,8 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -13,9 +18,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,16 +55,85 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mAuth = FirebaseAuth.getInstance();           //for user authentication
         requestCameraPermission();
-  //      mAuth = FirebaseAuth.getInstance();           //for user authentication
 
-        //need to implement: If user is not logged in, show the login page. Else show activity_main.
-        //for login: if register is clicked, show the registration form.
-        //for registration: if login is clicked, show the login page.
-        //if login btn is clicked in the login page, let user in and show the activity_main
+        //if the user is not logged in, show login page.
+        if(mAuth.getCurrentUser() == null){
+            setContentView(R.layout.login);
 
 
+            Button login = (Button) findViewById(R.id.loginbtn);
+
+            login.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    EditText eemail = (EditText) findViewById(R.id.email);
+                    EditText epassword = (EditText) findViewById(R.id.password);
+                    String email =  eemail.getText().toString();
+                    String password =  epassword.getText().toString();
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
+                            new OnCompleteListener<AuthResult>()
+                            {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task)
+                                {
+                                    if (!task.isSuccessful())
+                                    {
+                                        try
+                                        {
+                                            throw task.getException();
+                                        }
+                                        // if user enters wrong email.
+                                        catch (FirebaseAuthInvalidUserException invalidEmail)
+                                        {
+                                            Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+                                            // TODO: take your actions!
+                                        }
+                                        // if user enters wrong password.
+                                        catch (FirebaseAuthInvalidCredentialsException wrongPassword)
+                                        {
+                                            Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_LONG).show();
+                                            // TODO: Take your action
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            Toast.makeText(getApplicationContext(), "Error signing in: " + e, Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "Successfully signed in", Toast.LENGTH_LONG).show();
+                                        //update ui
+                                        load();
+                                    }
+                                }
+                            }
+                    );
+                }
+            });
+
+
+            //clicking on register button takes user to the registration page
+            Button register = (Button) findViewById(R.id.registerbtn);
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent myIntent = new Intent(MainActivity.this, Register.class);
+                    startActivity(myIntent);
+                }});
+
+        }
+        else{
+            //load the main activity
+            load();
+        }
+
+
+    }
+
+    //loads activity main
+    public void load(){
+        setContentView(R.layout.activity_main);
         ViewPager2 viewPager = findViewById(R.id.pager);
         TabLayout tabLayout = findViewById(R.id.navigation_tabs);
 
@@ -65,18 +145,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Work in progress: user authentication
-/*
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            reload();
-        }
-    }
-*/
     // Fragment Adaptor class for View Pager
     private class ViewPagerFragmentAdaptor extends FragmentStateAdapter {
 
