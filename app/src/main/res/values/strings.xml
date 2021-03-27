@@ -6,4 +6,9 @@
     <string name="watchlist_fragment">Watchlist Fragment</string>
     <string name="background_for_camera_fragment">background for camera fragment</string>
     <string name="camera_launch_button_text">Scan a Card!</string>
+    <string name="loading">Loading…</string>
+    <string name="imgView_cardSelection_description">displays user selected card</string>
+    <string name="back">Back</string>
+    <string name="select_card">Select Card</string>
+    <string name="recycler_item_imageView_description">displays card image for recycler</string>
 </resources>

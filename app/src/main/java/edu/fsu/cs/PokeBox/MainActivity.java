@@ -162,8 +162,9 @@ public class MainActivity extends AppCompatActivity {
                     return new WatchlistFragment();
                 case 3:
                     return new SettingsFragment();
+                default:
+                    return new CardViewerFragment();
             }
-            return new CardViewerFragment();
         }
 
         @Override
