@@ -30,6 +30,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -108,6 +109,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
             selectedCardView.setVisibility(View.INVISIBLE);
 
             // TODO: 3/26/21 Save card to database
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
             PokeCard card = selectedCard;
 
             Toast.makeText(getContext(), "Card Added to Collection!", Toast.LENGTH_LONG).show();
@@ -306,8 +308,9 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                     JSONObject pokeImages = pokeObj.getJSONObject("images");
                                     String id = pokeObj.getString("id");
                                     String img1 = pokeImages.getString("large");
+                                    JSONObject prices = pokeObj.getJSONObject("prices");
 
-                                    PokeCard card = new PokeCard(id, name, types, evolvesTo, null);
+                                    PokeCard card = new PokeCard(id, name, types, evolvesTo, null, prices);
                                     cards.add(card);
 
                                     new DownloadTask().execute(stringToURL(img1));

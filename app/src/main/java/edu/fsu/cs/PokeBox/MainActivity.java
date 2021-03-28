@@ -62,17 +62,19 @@ public class MainActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser() == null){
             setContentView(R.layout.login);
 
-
             Button login = (Button) findViewById(R.id.loginbtn);
 
-            login.setOnClickListener(new View.OnClickListener(){
+            login.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
+                public void onClick(View v) {
                     EditText eemail = (EditText) findViewById(R.id.email);
                     EditText epassword = (EditText) findViewById(R.id.password);
                     String email =  eemail.getText().toString();
                     String password =  epassword.getText().toString();
-                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
+                    if (email.isEmpty() || password.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
+                    } else {
+                        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
                             new OnCompleteListener<AuthResult>()
                             {
                                 @Override
@@ -106,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             }
-                    );
+                        );
+                    }
                 }
             });
 

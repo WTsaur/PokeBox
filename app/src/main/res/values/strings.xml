@@ -11,4 +11,13 @@
     <string name="back">Back</string>
     <string name="select_card">Select Card</string>
     <string name="recycler_item_imageView_description">displays card image for recycler</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="new_user">New User?</string>
+    <string name="register">Register</string>
+    <string name="registerBold">REGISTER</string>
+    <string name="loginBold">LOGIN</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="existing_user">Existing User?</string>
 </resources>

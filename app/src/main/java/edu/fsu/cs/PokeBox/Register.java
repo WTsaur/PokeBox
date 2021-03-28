@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-
 import java.util.Objects;
 
 public class Register extends MainActivity {
@@ -24,7 +23,6 @@ public class Register extends MainActivity {
 
        mAuth = FirebaseAuth.getInstance();
 
-
         register.setOnClickListener(v -> {
             final EditText eemail = findViewById(R.id.remail);
             final EditText epassword = findViewById(R.id.rpassword);
@@ -34,53 +32,50 @@ public class Register extends MainActivity {
             String password =  epassword.getText().toString();
             String cpassword = ecpassword.getText().toString();
 
-            //checking to see if email has been typed in
-            if(email != null) {
+            //checking to see if email, password, and confirm password have been typed in
+            if(!email.isEmpty() && !password.isEmpty() && !cpassword.isEmpty()) {
                 //checking to see if password matches confirm password
                 if(password.equals(cpassword)) {
-
-                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
-                                task -> {
-                                    if (!task.isSuccessful())
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
+                            task -> {
+                                if (!task.isSuccessful())
+                                {
+                                    try
                                     {
-                                        try
-                                        {
-                                            throw Objects.requireNonNull(task.getException());
-                                        }
-                                        // if user enters weak password
-                                        catch (FirebaseAuthWeakPasswordException weakPassword)
-                                        {
-                                            Toast.makeText(Register.this, "Weak password", Toast.LENGTH_LONG).show();
-                                        }
-
-                                        // if user enters wrong email.
-                                        catch (FirebaseAuthInvalidCredentialsException malformedEmail)
-                                        {
-                                            Toast.makeText(Register.this, "Invalid Email", Toast.LENGTH_LONG).show();
-                                        }
-                                        // if user enters existing email.
-                                        catch (FirebaseAuthUserCollisionException existEmail)
-                                        {
-                                            Toast.makeText(Register.this, "Email already exists" , Toast.LENGTH_LONG).show();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            Toast.makeText(Register.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                        }
+                                        throw Objects.requireNonNull(task.getException());
                                     }
-                                    else {
-                                        Toast.makeText(Register.this, "Successfully registered", Toast.LENGTH_LONG).show();
-                                        load(); //update ui
+                                    // if user enters weak password
+                                    catch (FirebaseAuthWeakPasswordException weakPassword)
+                                    {
+                                        Toast.makeText(Register.this, "Weak password", Toast.LENGTH_LONG).show();
+                                    }
+
+                                    // if user enters wrong email.
+                                    catch (FirebaseAuthInvalidCredentialsException malformedEmail)
+                                    {
+                                        Toast.makeText(Register.this, "Invalid Email", Toast.LENGTH_LONG).show();
+                                    }
+                                    // if user enters existing email.
+                                    catch (FirebaseAuthUserCollisionException existEmail)
+                                    {
+                                        Toast.makeText(Register.this, "Email already exists" , Toast.LENGTH_LONG).show();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Toast.makeText(Register.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                                     }
                                 }
-                        );
-
+                                else {
+                                    Toast.makeText(Register.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                                    load(); //update ui
+                                }
+                            }
+                    );
                 }
                 else Toast.makeText(Register.this, "Password does not match confirm password" , Toast.LENGTH_LONG).show();
             }
-            else  Toast.makeText(Register.this, "Email is blank" , Toast.LENGTH_LONG).show();
+            else  Toast.makeText(Register.this, "Please fill in all fields" , Toast.LENGTH_LONG).show();
         });
-
 
        //clicking on login button
         login.setOnClickListener(v -> {
