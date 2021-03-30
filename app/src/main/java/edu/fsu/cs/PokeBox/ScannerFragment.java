@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
@@ -39,16 +41,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 
 public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClickListener {
 
@@ -87,6 +84,15 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
         View view = inflater.inflate(
                 R.layout.fragment_scanner, container, false);
 
+        int pCheck = 0;
+        for (String permission : PERMISSIONS) {
+            int permStatus = ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), permission);
+            pCheck += permStatus;
+        }
+        if (pCheck != 0) {
+            requestPermissions();
+        }
+
         //set up elements
         selectedCardView = view.findViewById(R.id.selected_card_view);
         load_text = view.findViewById(R.id.loading_text);
@@ -108,9 +114,10 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
             btnCancel.setVisibility(View.INVISIBLE);
             selectedCardView.setVisibility(View.INVISIBLE);
 
-            // TODO: 3/26/21 Save card to database
+            // Save card to database
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            PokeCard card = selectedCard;
+            DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER).child(selectedCard.getId());
+            reference.setValue(selectedCard);
 
             Toast.makeText(getContext(), "Card Added to Collection!", Toast.LENGTH_LONG).show();
             recyclerView.setVisibility(View.INVISIBLE);
@@ -207,9 +214,6 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                     Text.Line line = block.getLines().get(0);
                     String lineText = line.getText();
 
-                    // TODO: 3/21/21 Remove line below 
-                    Log.e("LINE: ", lineText);
-
                     // Parse Line
                     String[] tokens = lineText.split(" ");
                     StringBuilder str = new StringBuilder();
@@ -232,11 +236,13 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
 
                         int stagIdx = tok.indexOf("STAGE");
                         if (stagIdx > -1) {
-                            if (tok.charAt(5) == 'T' && tok.charAt(4) == 'E') {
-                                tok = tok.substring(6);
-                            } else {
-                                tok = tok.substring(5);
-                            }
+                            if (tok.length() > 5) {
+                                if (tok.charAt(5) == 'T' && tok.charAt(4) == 'E') {
+                                    tok = tok.substring(6);
+                                } else {
+                                    tok = tok.substring(5);
+                                }
+                            } else continue;
                         }
 
                         int basIdx = tok.indexOf("BASIC");
@@ -255,13 +261,8 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                     }
 
                     // Send query request to TCG API to check if pokeName exists
-
-                    Log.e("POKE NAME: ", pokeName);
-
                     RequestQueue queue = Volley.newRequestQueue(getContext());
                     String url = BASE_URL + pokeName + "\"";
-
-                    Log.e("URL: ", url);
 
                     JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
                         try {
@@ -275,7 +276,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                 String name = obj.getString("name");
 
                                 JSONArray typeArr;
-                                List<String> types = new ArrayList<>();
+                                List<Object> types = new ArrayList<>();
                                 if (obj.has("types")) {
                                     typeArr = obj.getJSONArray("types");
                                     for (int i = 0; i < typeArr.length(); i++) {
@@ -286,7 +287,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                 }
 
                                 JSONArray evolveArr;
-                                List<String> evolvesTo = new ArrayList<>();
+                                List<Object> evolvesTo = new ArrayList<>();
                                 if (obj.has("evolvesTo")) {
                                     evolveArr = obj.getJSONArray("evolvesTo");
                                     for (int i = 0; i < evolveArr.length(); i++) {
@@ -300,24 +301,69 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                 DOWNLOAD_TASKS = count;
                                 TASKS_COMPLETED = 0;
                                 load_text.setVisibility(View.VISIBLE);
-                                load_text.setText("Loading... 0/" + DOWNLOAD_TASKS);
+                                String txt = "Loading... 0/" + DOWNLOAD_TASKS;
+                                load_text.setText(txt);
                                 cards.clear();
 
                                 for (int i = 0; i < pokeData.length(); i++) {
                                     JSONObject pokeObj = pokeData.getJSONObject(i);
                                     JSONObject pokeImages = pokeObj.getJSONObject("images");
                                     String id = pokeObj.getString("id");
-                                    String img1 = pokeImages.getString("large");
-                                    JSONObject prices = pokeObj.getJSONObject("prices");
+                                    String imgUrlStr = pokeImages.getString("large");
+                                    JSONObject tcgPlayer;
+                                    JSONObject pricesJSON;
+                                    Map<String, Object> prices = new HashMap<>();
+                                    if (pokeObj.has("tcgplayer")) {
+                                        tcgPlayer = pokeObj.getJSONObject("tcgplayer");
+                                        pricesJSON = tcgPlayer.getJSONObject("prices");
+                                        if (pricesJSON.has("normal")) {
+                                            try {
+                                                JSONObject normalPrices = pricesJSON.getJSONObject("normal");
+                                                double marketPrice = normalPrices.getDouble("market");
+                                                prices.put("normal", marketPrice);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        if (pricesJSON.has("holofoil")) {
+                                            try {
+                                                JSONObject holoPrices = pricesJSON.getJSONObject("holofoil");
+                                                double marketPrice = holoPrices.getDouble("market");
+                                                prices.put("holofoil", marketPrice);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        if (pricesJSON.has("reverseHolofoil")) {
+                                            try {
+                                                JSONObject holoPrices = pricesJSON.getJSONObject("reverseHolofoil");
+                                                double marketPrice = holoPrices.getDouble("market");
+                                                prices.put("reverseHolofoil", marketPrice);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        if (pricesJSON.has("1stEditionHolofoil")) {
+                                            try {
+                                                JSONObject holoPrices = pricesJSON.getJSONObject("1stEditionHolofoil");
+                                                double marketPrice = holoPrices.getDouble("market");
+                                                prices.put("1stEditionHolofoil", marketPrice);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
 
-                                    PokeCard card = new PokeCard(id, name, types, evolvesTo, null, prices);
+                                    if (prices.isEmpty()) {
+                                        prices.put("none", -1);
+                                    }
+
+                                    PokeCard card = new PokeCard(id, name, types, evolvesTo, prices);
+                                    card.setImageUrl(imgUrlStr);
                                     cards.add(card);
 
-                                    new DownloadTask().execute(stringToURL(img1));
+                                    new DownloadTask().execute(stringToURL(imgUrlStr));
                                 }
-
-
-
                             } else {
                                 Toast.makeText(getContext(), "Unable to find pokemon: " + pokeName, Toast.LENGTH_LONG).show();
                             }
@@ -326,12 +372,9 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                         }
                     }, error -> Log.e("REQUEST ERROR: ", error.toString()));
                     queue.add(request);
-
-
                 } else {
                     Toast.makeText(getContext(), "No Text Found!", Toast.LENGTH_LONG).show();
                 }
-
             }).addOnFailureListener(Throwable::printStackTrace);
         } catch(IOException e) {
             e.printStackTrace();
@@ -339,7 +382,6 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
     }
 
     public void displayMatches() {
-        Log.e("DOWNLOAD TASKS FINISHED:", "displaying matches");
         CardsAdapter cardsAdapter = new CardsAdapter(cards, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -355,7 +397,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
         btnCancel.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
         selectedCard = card;
-        selectedCardView.setImageBitmap(card.getImage());
+        selectedCardView.setImageBitmap(card.getImageBitmap());
         selectedCardView.setVisibility(View.VISIBLE);
     }
 
@@ -379,9 +421,10 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
         protected void onPostExecute(Bitmap result){
 
             if(result!=null){
-                cards.get(TASKS_COMPLETED).setImage(result);
+                cards.get(TASKS_COMPLETED).setImageBitmap(result);
                 TASKS_COMPLETED += 1;
-                load_text.setText("Loading... " + TASKS_COMPLETED + "/" + DOWNLOAD_TASKS);
+                String loadTxt = "Loading... " + TASKS_COMPLETED + "/" + DOWNLOAD_TASKS;
+                load_text.setText(loadTxt);
                 if (TASKS_COMPLETED == DOWNLOAD_TASKS) {
                     displayMatches();
                     load_text.setVisibility(View.INVISIBLE);
@@ -392,6 +435,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
             }
         }
     }
+
     protected URL stringToURL(String src) {
         try {
             return new URL(src);

@@ -36,7 +36,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         PokeCard card = cards.get(position);
 
         ImageView imgView = holder.imageView;
-        imgView.setImageBitmap(card.getImage());
+        imgView.setImageBitmap(card.getImageBitmap());
     }
 
     @Override

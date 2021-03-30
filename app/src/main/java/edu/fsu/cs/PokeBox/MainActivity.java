@@ -2,7 +2,6 @@ package edu.fsu.cs.PokeBox;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,14 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
@@ -28,9 +25,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    public static String CURRENT_USER;
 
     // list of icons used for page navigation bar
     private final int[] icons = {
@@ -40,23 +40,12 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.settings_tab_icon
     };
 
-    private void requestCameraPermission() {
-        String permission = Manifest.permission.CAMERA;
-        int grant = ContextCompat.checkSelfPermission(this, permission);
-        if ( grant != PackageManager.PERMISSION_GRANTED) {
-            String[] permission_list = new String[2];
-            permission_list[0] = permission;
-            ActivityCompat.requestPermissions(this, permission_list, 1);
-        }
-    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();           //for user authentication
-        requestCameraPermission();
+
+        CURRENT_USER = "NONE";
 
         //if the user is not logged in, show login page.
         if(mAuth.getCurrentUser() == null){
@@ -137,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ViewPager2 viewPager = findViewById(R.id.pager);
         TabLayout tabLayout = findViewById(R.id.navigation_tabs);
+
+        CURRENT_USER = mAuth.getCurrentUser().getUid();
 
         // setup view pager
         viewPager.setAdapter(new ViewPagerFragmentAdaptor(this));

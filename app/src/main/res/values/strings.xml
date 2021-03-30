@@ -20,4 +20,7 @@
     <string name="loginBold">LOGIN</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="existing_user">Existing User?</string>
+    <string name="button_for_searchedittext">button for searchEditText</string>
+    <string name="button_for_filtering_card_collection_data">button for filtering card collection data</string>
+    <string name="search">Search...</string>
 </resources>
