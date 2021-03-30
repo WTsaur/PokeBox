@@ -3,10 +3,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/settings_fragment"
-              android:layout_centerHorizontal="true"
-              android:layout_centerVertical="true"/>
 
     <Button
         android:id="@+id/logout"
@@ -16,6 +12,56 @@
         android:layout_marginLeft="148dp"
         android:background="@color/red"
         android:text="Logout" />
+
+    <TextView
+        android:id="@+id/displayemail"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="Email" />
+
+    <EditText
+        android:id="@+id/oldp"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/displayemail"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="41dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Old Password"/>
+
+    <EditText
+        android:id="@+id/newp"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/oldp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="New Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/newcp"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newcp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="110dp"
+        android:text="Change Password" />
 
 
 </RelativeLayout>

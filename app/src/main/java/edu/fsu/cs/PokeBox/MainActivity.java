@@ -1,17 +1,17 @@
 package edu.fsu.cs.PokeBox;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -27,7 +27,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
+import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -40,23 +42,13 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.settings_tab_icon
     };
 
-    private void requestCameraPermission() {
-        String permission = Manifest.permission.CAMERA;
-        int grant = ContextCompat.checkSelfPermission(this, permission);
-        if ( grant != PackageManager.PERMISSION_GRANTED) {
-            String[] permission_list = new String[2];
-            permission_list[0] = permission;
-            ActivityCompat.requestPermissions(this, permission_list, 1);
-        }
-    }
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();           //for user authentication
-        requestCameraPermission();
+
 
         //if the user is not logged in, show login page.
         if(mAuth.getCurrentUser() == null){
