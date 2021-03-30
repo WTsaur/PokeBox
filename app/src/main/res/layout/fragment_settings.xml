@@ -17,7 +17,7 @@
         android:id="@+id/displayemail"
         android:layout_width="match_parent"
         android:layout_height="82dp"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:gravity="center"
         android:text="Email" />
 
@@ -55,7 +55,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/changepassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newcp"
