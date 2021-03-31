@@ -273,19 +273,6 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                 JSONObject obj = pokeData.getJSONObject(0);
 
                                 String name = obj.getString("name");
-                                String HP = obj.getString("hp");
-                                String rarity = obj.getString("rarity");
-
-                                JSONArray attacksArr;
-                                List<Object> attacks = new ArrayList<>();
-                                if (obj.has("attacks")) {
-                                    attacksArr = obj.getJSONArray("attacks");
-                                    for (int i = 0; i < attacksArr.length(); i++) {
-                                        attacks.add(attacksArr.getString(i));
-                                    }
-                                } else {
-                                    attacks.add("");
-                                }
 
                                 JSONArray typeArr;
                                 List<Object> types = new ArrayList<>();
@@ -326,6 +313,8 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                     JSONObject tcgPlayer;
                                     JSONObject pricesJSON;
                                     Map<String, Object> prices = new HashMap<>();
+
+
                                     if (pokeObj.has("tcgplayer")) {
                                         tcgPlayer = pokeObj.getJSONObject("tcgplayer");
                                         pricesJSON = tcgPlayer.getJSONObject("prices");

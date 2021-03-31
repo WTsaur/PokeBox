@@ -54,8 +54,6 @@ public class CardView extends MainActivity{
         Tname = (TextView) findViewById(R.id.displayname);
         Tname.setText(name);
         new DownloadImageTask((ImageView) findViewById(R.id.pokeimage)).execute(url);
-        String id = intent.getStringExtra("pokeid");
-        display(name);
 
 
 
@@ -86,48 +84,7 @@ public class CardView extends MainActivity{
         }
     }
 
-    public void display(String pokename){
-        // Send query request to TCG API to check if pokeName exists
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = BASE_URL + pokename + "\"";
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-            try {
-                int count = response.getInt("count");
-                if (count != 0) {
-                    JSONArray pokeData = response.getJSONArray("data");
-
-                    // Fetch data that will be the same across all variations of current pokemon
-                    JSONObject obj = pokeData.getJSONObject(0);
-
-                    String name = obj.getString("name");
-
-                    JSONArray typeArr;
-                    List<Object> types = new ArrayList<>();
-                    if (obj.has("types")) {
-                        typeArr = obj.getJSONArray("types");
-                        for (int i = 0; i < typeArr.length(); i++) {
-                            types.add(typeArr.getString(i));
-                            Toast.makeText(this, "Types = " + typeArr.getString(i), Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        types.add("");
-                    }
-
-
-
-
-
-                } else {
-                    Toast.makeText(this, "Unable to find pokemon id: " + pokename, Toast.LENGTH_LONG).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }, error -> Log.e("REQUEST ERROR: ", error.toString()));
-        queue.add(request);
-
-    }
 
 
     protected URL stringToURL(String src) {
