@@ -31,3 +31,17 @@
 ![settings](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/pokebox-settings.jpg)
 #### Demo
 ![Progress 1 Demo](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/app_demo_progress1.gif)
+
+## Progress Report 2
+### Contributions
+- William Tsaur
+  - Implemented API request after card scan to retrieve and display a list of cards that match the card that was scanned
+  - Implemented Firebase database allowing users to save scanned cards to the database and to retrieve from any device as long as they log onto their account
+  - Added background, buttons, and a recycler view to the Card Viewer Fragment so that a user can view their card collection
+  - Created PokeCard.java, a custom java object for ease of writing pokemon card data to the Firebase database
+  - Created item_card.xml to contain Pokemon card image data when used in recycler view
+  - Created CardsAdapter, an adapter required when using recycler view
+- Tommy Chong
+  - 
+### Current State of the Application
+> 

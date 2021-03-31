@@ -272,8 +272,6 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                 // Fetch data that will be the same across all variations of current pokemon
                                 JSONObject obj = pokeData.getJSONObject(0);
 
-                                String name = obj.getString("name");
-
                                 JSONArray typeArr;
                                 List<Object> types = new ArrayList<>();
                                 if (obj.has("types")) {
@@ -309,12 +307,67 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                     JSONObject pokeObj = pokeData.getJSONObject(i);
                                     JSONObject pokeImages = pokeObj.getJSONObject("images");
                                     String id = pokeObj.getString("id");
+                                    String name = pokeObj.getString("name");
+
+                                    String hp = pokeObj.getString("hp");
+                                    String rarity = pokeObj.getString("rarity");
+                                    String number = pokeObj.getString("number");
+
+                                    JSONArray attacksArr;
+                                    List<Object> attacks = new ArrayList<>();
+                                    if (pokeObj.has("attacks")) {
+                                        attacksArr = pokeObj.getJSONArray("attacks");
+                                        for (int j = 0; j < attacksArr.length(); j++) {
+                                            JSONObject attack = attacksArr.getJSONObject(j);
+                                            String attackStr = attack.getString("name") + ": " + attack.getString("text");
+                                            attacks.add(attackStr);
+                                        }
+                                    } else {
+                                        attacks.add("");
+                                    }
+
+                                    JSONArray subtypesArr;
+                                    List<Object> subtypes = new ArrayList<>();
+                                    if (pokeObj.has("subtypes")) {
+                                        subtypesArr = pokeObj.getJSONArray("subtypes");
+                                        for (int j = 0; j < subtypesArr.length(); j++) {
+                                            String subtype = subtypesArr.getString(j);
+                                            subtypes.add(subtype);
+                                        }
+                                    } else {
+                                        subtypes.add("");
+                                    }
+
+                                    JSONArray weaknessesArr;
+                                    List<Object> weaknesses = new ArrayList<>();
+                                    if (pokeObj.has("weaknesses")) {
+                                        weaknessesArr = pokeObj.getJSONArray("weaknesses");
+                                        for (int j = 0; j < weaknessesArr.length(); j++) {
+                                            JSONObject weakness = weaknessesArr.getJSONObject(j);
+                                            String weakText = weakness.getString("type") + " " + weakness.getString("value");
+                                            weaknesses.add(weakText);
+                                        }
+                                    } else {
+                                        weaknesses.add("");
+                                    }
+
+                                    JSONArray resistancesArr;
+                                    List<Object> resistances = new ArrayList<>();
+                                    if (pokeObj.has("resistances")) {
+                                        resistancesArr = pokeObj.getJSONArray("resistances");
+                                        for (int j = 0; j < resistancesArr.length(); j++) {
+                                            JSONObject resistance = resistancesArr.getJSONObject(j);
+                                            String resistText = resistance.getString("type") + " " + resistance.getString("value");
+                                            resistances.add(resistText);
+                                        }
+                                    } else {
+                                        resistances.add("");
+                                    }
+
                                     String imgUrlStr = pokeImages.getString("large");
                                     JSONObject tcgPlayer;
                                     JSONObject pricesJSON;
                                     Map<String, Object> prices = new HashMap<>();
-
-
                                     if (pokeObj.has("tcgplayer")) {
                                         tcgPlayer = pokeObj.getJSONObject("tcgplayer");
                                         pricesJSON = tcgPlayer.getJSONObject("prices");
@@ -357,10 +410,10 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                     }
 
                                     if (prices.isEmpty()) {
-                                        prices.put("none", -1);
+                                        prices.put("none", 0);
                                     }
 
-                                    PokeCard card = new PokeCard(id, name, HP, rarity, attacks, types, evolvesTo, prices);
+                                    PokeCard card = new PokeCard(id, name, hp, rarity, number, attacks, subtypes, weaknesses, resistances, types, evolvesTo, prices);
                                     card.setImageUrl(imgUrlStr);
                                     cards.add(card);
 
