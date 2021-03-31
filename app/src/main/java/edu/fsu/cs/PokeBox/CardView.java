@@ -8,8 +8,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -17,18 +20,26 @@ import java.net.URL;
 
 public class CardView extends MainActivity{
     private ImageView pokecardimage;
+    private TextView Tname;
     private String url;
+    private String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardview);
         Intent intent = getIntent();
+        //setting the loading animation for card image
         pokecardimage = (ImageView) findViewById(R.id.pokeimage);
         Glide.with(this).load(R.drawable.loading).into(pokecardimage);
 
+        //showing the card image and pokemon name
         url = intent.getStringExtra("imageurl");
-
+        name = intent.getStringExtra("name");
+        Tname = (TextView) findViewById(R.id.displayname);
+        Tname.setText(name);
         new DownloadImageTask((ImageView) findViewById(R.id.pokeimage)).execute(url);
+
+
 
 
 
