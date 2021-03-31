@@ -308,8 +308,12 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                     JSONObject pokeImages = pokeObj.getJSONObject("images");
                                     String id = pokeObj.getString("id");
                                     String name = pokeObj.getString("name");
-
-                                    String hp = pokeObj.getString("hp");
+                                    String hp;
+                                    if (pokeObj.has("hp")) {
+                                        hp = pokeObj.getString("hp");
+                                    } else {
+                                        hp = "";
+                                    }
                                     String rarity = pokeObj.getString("rarity");
                                     String number = pokeObj.getString("number");
 
