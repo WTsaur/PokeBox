@@ -2,7 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#606EFF">
+             >
+
+    <ImageView
+        android:id="@+id/settings_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/background_for_camera_fragment"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_no_logo" />
 
     <TextView
             android:id="@+id/register"

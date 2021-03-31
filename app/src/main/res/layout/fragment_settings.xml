@@ -3,6 +3,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/settings_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_no_logo" />
 
     <Button
         android:id="@+id/logout"
@@ -28,6 +34,7 @@
         android:layout_below="@+id/displayemail"
         android:layout_marginLeft="120dp"
         android:layout_marginTop="41dp"
+
         android:ems="10"
         android:inputType="textPassword"
         android:hint="Old Password"/>
