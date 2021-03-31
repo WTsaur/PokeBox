@@ -221,6 +221,13 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                     for (String token : tokens) {
                         String tok = token;
 
+                        if (tok.matches(".*[0-9]+.*")) {
+                            do {
+                                tok = tok.substring(0, tok.length() - 1);
+                            } while(tok.matches(".*[0-9]+.*"));
+                            tok = tok.substring(0, tok.length() - 1);
+                        }
+
                         int idx = tok.indexOf("(");
                         if (idx > -1) {
                             str.append(tok.substring(idx + 1));
@@ -245,7 +252,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                         }
 
                         int basIdx = tok.indexOf("BASIC");
-                        if (basIdx == -1 && !tok.matches(".*[0-9]+.*")) {
+                        if (basIdx == -1) {
                             if (str.length() != 0) {
                                 str.append(" ");
                             }
