@@ -1,6 +1,7 @@
 package edu.fsu.cs.PokeBox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -148,7 +149,13 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
 
     @Override
     public void OnCardClick(int position) {
-
+        //load the cardview activity
+        Intent intent = new Intent(getActivity(), CardView.class);
+        Bundle b = new Bundle();
+        b.putString("name", collection.get(position).getName());
+        b.putString("imageurl", collection.get(position).getImageUrl());
+        intent.putExtras(b);
+        startActivity(intent);
         Toast.makeText(getContext(), collection.get(position).getName() + " clicked!", Toast.LENGTH_SHORT).show();
 
     }

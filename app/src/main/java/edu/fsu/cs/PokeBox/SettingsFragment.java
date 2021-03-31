@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SettingsFragment extends Fragment {
-    View view;
+    private View view;
     private FirebaseAuth mAuth;
     private TextView eemail;
     private EditText eoldp, enewp, econfirmp;

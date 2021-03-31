@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register"/>
+        <activity android:name=".CardView"/>
         <meta-data
                 android:name="com.google.mlkit.vision.DEPENDENCIES"
                 android:value="ocr"/>
