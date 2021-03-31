@@ -12,6 +12,9 @@ import java.util.Map;
 public class PokeCard {
     private final String id;
     private final String name;
+    private final String HP;
+    private final String rarity;
+    private final List<Object> attacks;
     private final List<Object> types;
     private final List<Object> evolvesTo;
     private String imageUrl;
@@ -22,6 +25,9 @@ public class PokeCard {
     public PokeCard() {
         this.id = "";
         this.name = "";
+        this.HP = "";
+        this.rarity = "";
+        this.attacks = new ArrayList<>();
         this.types = new ArrayList<>();
         this.evolvesTo = new ArrayList<>();
         this.imageUrl = "";
@@ -29,9 +35,12 @@ public class PokeCard {
         this.imageBitmap = null;
     }
 
-    public PokeCard(String id, String name, List<Object> types, List<Object> evolvesTo, Map<String, Object> prices) {
+    public PokeCard(String id, String name, String hp, String rarity, List<Object> attacks, List<Object> types, List<Object> evolvesTo, Map<String, Object> prices) {
         this.id = id;
         this.name = name;
+        this.HP = hp;
+        this.rarity = rarity;
+        this.attacks = attacks;
         this.types = types;
         this.evolvesTo = evolvesTo;
         this.imageUrl = "";
@@ -47,6 +56,17 @@ public class PokeCard {
         return name;
     }
 
+    public String getHp() {
+        return HP;
+    }
+
+    public String getRarity() {
+        return rarity;
+    }
+
+    public List<Object> getAttacks() {
+        return attacks;
+    }
     public List<Object> getTypes() {
         return types;
     }
@@ -77,6 +97,9 @@ public class PokeCard {
         Map<String, Object> result = new HashMap<>();
         result.put("id", id);
         result.put("name", name);
+        result.put("hp", HP);
+        result.put("rarity", rarity);
+        result.put("attacks", attacks);
         result.put("types", types);
         result.put("evolvesTo", evolvesTo);
         result.put("imageUrl", imageUrl);

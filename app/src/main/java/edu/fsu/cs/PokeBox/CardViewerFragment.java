@@ -154,6 +154,7 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         Bundle b = new Bundle();
         b.putString("name", collection.get(position).getName());
         b.putString("imageurl", collection.get(position).getImageUrl());
+        b.putString("pokeid", collection.get(position).getId());
         intent.putExtras(b);
         startActivity(intent);
         Toast.makeText(getContext(), collection.get(position).getName() + " clicked!", Toast.LENGTH_SHORT).show();

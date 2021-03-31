@@ -199,7 +199,6 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
     }
 
     private void processPhoto() {
-
         // process image
         InputImage img;
         try {
@@ -274,6 +273,19 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                 JSONObject obj = pokeData.getJSONObject(0);
 
                                 String name = obj.getString("name");
+                                String HP = obj.getString("hp");
+                                String rarity = obj.getString("rarity");
+
+                                JSONArray attacksArr;
+                                List<Object> attacks = new ArrayList<>();
+                                if (obj.has("attacks")) {
+                                    attacksArr = obj.getJSONArray("attacks");
+                                    for (int i = 0; i < attacksArr.length(); i++) {
+                                        attacks.add(attacksArr.getString(i));
+                                    }
+                                } else {
+                                    attacks.add("");
+                                }
 
                                 JSONArray typeArr;
                                 List<Object> types = new ArrayList<>();
@@ -285,6 +297,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                 } else {
                                     types.add("");
                                 }
+
 
                                 JSONArray evolveArr;
                                 List<Object> evolvesTo = new ArrayList<>();
@@ -358,7 +371,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                         prices.put("none", -1);
                                     }
 
-                                    PokeCard card = new PokeCard(id, name, types, evolvesTo, prices);
+                                    PokeCard card = new PokeCard(id, name, HP, rarity, attacks, types, evolvesTo, prices);
                                     card.setImageUrl(imgUrlStr);
                                     cards.add(card);
 
