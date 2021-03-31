@@ -13,12 +13,15 @@
         android:scaleType="centerCrop"
         android:src="@drawable/background_no_logo" />
 
+
+
     <ImageView
         android:id="@+id/pokeimage"
         android:layout_width="262dp"
         android:layout_height="273dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_pokebox_icon_camera" />
+        android:src="@drawable/loading"
+        />
 
 
 

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,11 +23,13 @@ public class CardView extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardview);
         Intent intent = getIntent();
+        pokecardimage = (ImageView) findViewById(R.id.pokeimage);
+        Glide.with(this).load(R.drawable.loading).into(pokecardimage);
 
         url = intent.getStringExtra("imageurl");
 
-       // pokecardimage = (ImageView) findViewById(R.id.pokeimage);
         new DownloadImageTask((ImageView) findViewById(R.id.pokeimage)).execute(url);
+
 
 
     }
