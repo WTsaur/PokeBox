@@ -49,4 +49,7 @@
   - Implemented change user password in settings fragment. Settings fragment also displays user email address.
   - Created CardView.java, this activity is started whenever a card is clicked in CardsViewer Fragment. It retrieves the card information and displays all the information.
 ### Current State of the Application
-> 
+> We have established a user login and registration system, now users can create accounts and login to their accounts. Users will be logged in when they exit the application so > that they don't need to login again. Card scan is now fully functional and now displays a list of cards that match the card that was scanned. User can select the card that
+> matches the card they have. Once the card is selected, the card is saved to the database and user can now view their saved cards in the cardsviewer fragment. Selecting a card 
+> now starts a new activity, which it displays all the information from the pokemon card (Card number, HP, Stage, Attacks, Weaknessess, Resistances, card type). The activity
+> also displays the pokemon card image. Logout button is also functional now.
