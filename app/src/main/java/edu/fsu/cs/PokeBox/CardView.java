@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CardView extends MainActivity{
-    private ImageView pokecardimage;
+    private ImageView pokecardimage, pokecardimageclick;
     private TextView Tname, Tnumberandrarity, Ttypehpstage, Tattacks, Tweaknessandresistance;
     private String url, name, hp, number, rarity, type, stage, attacks, weakness, resistance;
     private String result;
@@ -47,6 +47,15 @@ public class CardView extends MainActivity{
         //setting the loading animation for card image
         pokecardimage = (ImageView) findViewById(R.id.pokeimage);
         Glide.with(this).load(R.drawable.loading).into(pokecardimage);
+
+        pokecardimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pokecardimageclick = (ImageView) findViewById(R.id.clickpokeimage);
+                pokecardimageclick.setVisibility(View.VISIBLE);
+
+              Toast.makeText(getApplicationContext(), "Pokecardimage clicked", Toast.LENGTH_LONG).show();
+            }});
 
         //showing the card image and pokemon name
         url = intent.getStringExtra("imageurl");
