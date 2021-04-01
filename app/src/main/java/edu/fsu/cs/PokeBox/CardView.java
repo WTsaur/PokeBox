@@ -33,11 +33,11 @@ import java.util.Map;
 
 public class CardView extends MainActivity{
     private ImageView pokecardimage;
-    private TextView Tname;
-    private String url;
-    private String name;
-    private static final String API_KEY = "b87cf1ba-0a63-4073-9135-7573becb8002";
-    private static final String BASE_URL = "https://api.pokemontcg.io/v2/cards?X-Api-Key:" + API_KEY + "&q=name:\"";
+    private TextView Tname, Tnumberandrarity, Ttypehpstage, Tattacks, Tweaknessandresistance;
+    private String url, name, hp, number, rarity, type, stage, attacks, weakness, resistance;
+    private String result;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,32 @@ public class CardView extends MainActivity{
         Tname.setText(name);
         new DownloadImageTask((ImageView) findViewById(R.id.pokeimage)).execute(url);
 
+        //setting Card Number and Rarity
+        Tnumberandrarity = (TextView) findViewById(R.id.numberandrarity);
+        number = intent.getStringExtra("number");
+        rarity = intent.getStringExtra("rarity");
+        result = number + " / " + rarity;
+        Tnumberandrarity.setText(result);
 
+        //setting Card type, HP, and stage
+        Ttypehpstage = (TextView) findViewById(R.id.typehpstage);
+        type = intent.getStringExtra("types");
+        hp = intent.getStringExtra("hp");
+        stage = intent.getStringExtra("stages");
+        result = type + " / " + hp + " / " + stage;
+        Ttypehpstage.setText(result);
+
+        //setting attacks
+        Tattacks = (TextView) findViewById(R.id.attacks);
+        attacks = intent.getStringExtra("attacks");
+        Tattacks.setText(attacks);
+
+        //setting weakness and resistance
+        Tweaknessandresistance = (TextView) findViewById(R.id.weaknessandresistance);
+        weakness = intent.getStringExtra("weakness");
+        resistance = intent.getStringExtra("resistance");
+        result = weakness + " / " + resistance;
+        Tweaknessandresistance.setText(result);
 
     }
 

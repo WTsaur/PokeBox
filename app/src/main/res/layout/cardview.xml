@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-
-    <ImageView
-        android:id="@+id/cardsview_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_no_logo" />
-
+        <RelativeLayout
+            android:id="@+id/form_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_no_logo">
 
 
     <ImageView
@@ -44,7 +39,85 @@
 
         android:textSize="30dp" />
 
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/displayname"
+                android:layout_marginTop="52dp"
+                android:text="Card Number / Rarity: "
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/numberandrarity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/displayname"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="52dp"
+                android:layout_toEndOf="@+id/textview"
+
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/typehpstage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/numberandrarity"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="17dp"
+                android:layout_toEndOf="@+id/textview1"
+
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/attacks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/typehpstage"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/textview2"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview"
+                android:layout_marginTop="16dp"
+                android:text="Card Type / HP / Stage: "
+                android:textSize="15dp" />
 
 
+            <TextView
+                android:id="@+id/textview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview1"
+                android:layout_marginTop="22dp"
+                android:text="Attacks: "
+                android:textSize="15dp" />
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/textview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/attacks"
+                android:layout_marginTop="15dp"
+                android:text="Weakness / Resistance: "
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/weaknessandresistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/attacks"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/textview3"
+                android:textSize="15dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+

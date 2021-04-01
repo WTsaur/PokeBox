@@ -22,6 +22,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.*;
+
+import org.json.JSONArray;
+
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,6 +45,12 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     private List<Integer> collectionIdxQueue = new ArrayList<>();
     private Set<String> cardIds = new HashSet<>();
 
+ /*   private List<Object> attacks;
+    private List<Object> types;
+    private List<Object> subtypes;
+    private List<Object> weaknesses;
+    private List<Object> resistances;
+*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -154,10 +163,60 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         Bundle b = new Bundle();
         b.putString("name", collection.get(position).getName());
         b.putString("imageurl", collection.get(position).getImageUrl());
-        b.putString("pokeid", collection.get(position).getId());
+        b.putString("hp", collection.get(position).getHp());
+        b.putString("rarity", collection.get(position).getRarity());
+        b.putString("number", collection.get(position).getNumber());
+
+        StringBuilder sb = new StringBuilder();
+        sb.setLength(0);
+        //get card type strings
+        List<Object> types = collection.get(position).getTypes();
+        for (int i=0; i<types.size(); i++){
+            sb.append((String) types.get(i));
+
+        }
+        b.putString("types", sb.toString());
+
+        sb.setLength(0);
+        //get card stage strings
+        List<Object> stages = collection.get(position).getSubtypes();
+        for (int i=0; i<stages.size(); i++){
+            sb.append((String) stages.get(i));
+
+        }
+        b.putString("stages", sb.toString());
+        sb.setLength(0);
+
+        //get card attack strings
+        List<Object> attacks = collection.get(position).getAttacks();
+        for (int i=0; i<attacks.size(); i++){
+            sb.append((String) attacks.get(i));
+            sb.append("\n");
+        }
+        b.putString("attacks", sb.toString());
+        sb.setLength(0);
+
+        //get card weakness
+        List<Object> weakness = collection.get(position).getWeaknesses();
+        for (int i=0; i<weakness.size(); i++){
+            sb.append((String) weakness.get(i));
+        }
+        b.putString("weakness", sb.toString());
+        sb.setLength(0);
+
+        //get card resistance
+        List<Object> resistance = collection.get(position).getResistances();
+        for (int i=0; i<resistance.size(); i++){
+            sb.append((String) resistance.get(i));
+        }
+        b.putString("resistance", sb.toString());
+        sb.setLength(0);
+
+
+
+
         intent.putExtras(b);
         startActivity(intent);
-        Toast.makeText(getContext(), collection.get(position).getName() + " clicked!", Toast.LENGTH_SHORT).show();
 
     }
 
