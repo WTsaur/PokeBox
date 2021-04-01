@@ -47,6 +47,6 @@
   - Implemented the login and registration screen for firebase authentication.
   - Implemented logout button for logging user out in settings fragment.
   - Implemented change user password in settings fragment. Settings fragment also displays user email address.
-  - Created CardView.java, this activity is started whenever a card is clicked in CardsViewer Fragment. It displays the card image and all other information of the Pokemon card.
+  - Created CardView.java, this activity is started whenever a card is clicked in CardsViewer Fragment. It retrieves the card information and displays all the information.
 ### Current State of the Application
 > 
