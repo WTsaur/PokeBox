@@ -40,17 +40,10 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     private TextView loadingText;
     private ImageButton searchBtn;
     private RecyclerView rv;
-
     private List<PokeCard> collection = new ArrayList<>();
     private List<Integer> collectionIdxQueue = new ArrayList<>();
     private Set<String> cardIds = new HashSet<>();
 
- /*   private List<Object> attacks;
-    private List<Object> types;
-    private List<Object> subtypes;
-    private List<Object> weaknesses;
-    private List<Object> resistances;
-*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -212,12 +205,8 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         b.putString("resistance", sb.toString());
         sb.setLength(0);
 
-
-
-
         intent.putExtras(b);
         startActivity(intent);
-
     }
 
     private class DownloadTask extends AsyncTask<URL,Void,Bitmap> {

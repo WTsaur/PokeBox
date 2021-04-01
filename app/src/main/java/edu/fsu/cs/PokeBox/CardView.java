@@ -37,8 +37,6 @@ public class CardView extends MainActivity{
     private String url, name, hp, number, rarity, type, stage, attacks, weakness, resistance;
     private String result;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,9 +115,6 @@ public class CardView extends MainActivity{
             bmImage.setImageBitmap(result);
         }
     }
-
-
-
 
     protected URL stringToURL(String src) {
         try {
