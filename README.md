@@ -42,6 +42,11 @@
   - Created item_card.xml to contain Pokemon card image data when used in recycler view
   - Created CardsAdapter, an adapter required when using recycler view
 - Tommy Chong
-  - 
+  - Implemented firebase authentication.
+  - Created register.java, register.xml, login.xml.
+  - Implemented the login and registration screen for firebase authentication.
+  - Implemented logout button for logging user out in settings fragment.
+  - Implemented change user password in settings fragment. Settings fragment also displays user email address.
+  - Created CardView.java, this activity is started whenever a card is clicked in CardsViewer Fragment. It displays the card image and all other information of the Pokemon card.
 ### Current State of the Application
 > 
