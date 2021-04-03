@@ -119,6 +119,84 @@
                 android:layout_toEndOf="@+id/textview3"
                 android:textSize="15dp" />
 
+            <TextView
+                android:id="@+id/textview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview3"
+                android:layout_marginTop="15dp"
+                android:text="Normal Price: "
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/nprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/weaknessandresistance"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/textview4"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textview5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview4"
+                android:layout_marginTop="15dp"
+                android:text="Holofoil Price: "
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/hprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nprice"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/textview5"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textview6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview5"
+                android:layout_marginTop="15dp"
+                android:text="Reverse Holofoil Price: "
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rhprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hprice"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/textview6"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textview7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview6"
+                android:layout_marginTop="15dp"
+                android:text="1st Edition Holofoil Price: "
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/fedhprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rhprice"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/textview7"
+                android:textSize="15dp" />
+
+
         </RelativeLayout>
     </ScrollView>
 

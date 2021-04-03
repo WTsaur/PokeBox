@@ -212,7 +212,34 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         b.putString("resistance", sb.toString());
         sb.setLength(0);
 
+        //get card price
+        Map<String, Object> prices = collection.get(position).getPrices();
+        if(!prices.containsKey("none")) {
+            if (prices.containsKey("normal")) {
+                String nprice = prices.get("normal").toString();
+                b.putString("nprice", nprice);
+            }
+            else b.putString("nprice", null);
 
+            if(prices.containsKey("holofoil")){
+                String hprice = prices.get("holofoil").toString();
+                b.putString("hprice",hprice);
+            }
+            else b.putString("hprice", null);
+
+            if(prices.containsKey("reverseHolofoil")){
+                String rhprice = prices.get("reverseHolofoil").toString();
+                b.putString("rhprice", rhprice);
+            }
+            else b.putString("rhprice", null);
+
+            if(prices.containsKey("1stEditionHolofoil")){
+                String fedhprice = prices.get("1stEditionHolofoil").toString();
+                b.putString("fedhprice", fedhprice);
+            }
+            else b.putString("fedhprice", null);
+
+        }
 
 
         intent.putExtras(b);

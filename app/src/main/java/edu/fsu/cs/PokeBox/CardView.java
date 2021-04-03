@@ -33,11 +33,13 @@ import java.util.Map;
 
 public class CardView extends MainActivity{
     private ImageView pokecardimage, pokecardimageclick;
-    private TextView Tname, Tnumberandrarity, Ttypehpstage, Tattacks, Tweaknessandresistance;
-    private String url, name, hp, number, rarity, type, stage, attacks, weakness, resistance;
+    private TextView Tname, Tnumberandrarity, Ttypehpstage, Tattacks, Tweaknessandresistance, Tprice, text;
+    private String url, name, hp, number, rarity, type, stage, attacks, weakness, resistance, normalprice, holoprice, reverseholoprice, firsteditionholoprice;
     private String result;
 
-
+    //TODO: Add to watchlist menu, delete option in the menu...?
+    //display price
+    //click on image expands the image
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,34 @@ public class CardView extends MainActivity{
         resistance = intent.getStringExtra("resistance");
         result = weakness + " / " + resistance;
         Tweaknessandresistance.setText(result);
+
+        //setting prices
+        normalprice = intent.getStringExtra("nprice");
+        holoprice = intent.getStringExtra("hprice");
+        reverseholoprice = intent.getStringExtra("rhprice");
+        firsteditionholoprice = intent.getStringExtra("fedhprice");
+
+        if(normalprice != null){
+            Tprice = (TextView) findViewById(R.id.nprice);
+            Tprice.setText(normalprice);
+        }
+
+        if(holoprice != null){
+            Tprice = (TextView) findViewById(R.id.hprice);
+            Tprice.setText(holoprice);
+        }
+
+        if(reverseholoprice != null){
+            Tprice = (TextView) findViewById(R.id.rhprice);
+            Tprice.setText(reverseholoprice);
+        }
+
+        if(firsteditionholoprice != null){
+            Tprice = (TextView) findViewById(R.id.fedhprice);
+            Tprice.setText(firsteditionholoprice);
+        }
+
+
 
     }
 
