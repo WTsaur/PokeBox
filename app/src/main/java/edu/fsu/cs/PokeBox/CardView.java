@@ -38,7 +38,6 @@ public class CardView extends MainActivity{
     private String result;
 
     //TODO: Add to watchlist menu, delete option in the menu...?
-    //display price
     //click on image expands the image
 
     @Override
