@@ -49,13 +49,15 @@ public class CardView extends MainActivity{
         pokecardimage = (ImageView) findViewById(R.id.pokeimage);
         Glide.with(this).load(R.drawable.loading).into(pokecardimage);
 
+
         pokecardimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pokecardimageclick = (ImageView) findViewById(R.id.clickpokeimage);
-                pokecardimageclick.setVisibility(View.VISIBLE);
-
-              Toast.makeText(getApplicationContext(), "Pokecardimage clicked", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplication(), ViewImage.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("url", url);
+                i.putExtras(bundle);
+                startActivity(i);
             }});
 
         //showing the card image and pokemon name
@@ -123,7 +125,7 @@ public class CardView extends MainActivity{
     }
 
     //getting the image from url
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
@@ -148,14 +150,4 @@ public class CardView extends MainActivity{
     }
 
 
-
-
-    protected URL stringToURL(String src) {
-        try {
-            return new URL(src);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
