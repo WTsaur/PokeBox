@@ -45,12 +45,6 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     private List<Integer> collectionIdxQueue = new ArrayList<>();
     private Set<String> cardIds = new HashSet<>();
 
- /*   private List<Object> attacks;
-    private List<Object> types;
-    private List<Object> subtypes;
-    private List<Object> weaknesses;
-    private List<Object> resistances;
-*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -238,13 +232,10 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
                 b.putString("fedhprice", fedhprice);
             }
             else b.putString("fedhprice", null);
-
         }
-
 
         intent.putExtras(b);
         startActivity(intent);
-
     }
 
     private class DownloadTask extends AsyncTask<URL,Void,Bitmap> {
