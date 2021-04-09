@@ -90,9 +90,44 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
             return false;
         });
 
+        //search by name, searching an empty string returns all cards
         searchBtn.setOnClickListener(v -> {
             hideKeyboard(v);
-            Toast.makeText(getContext(), searchText.getText().toString(), Toast.LENGTH_LONG).show();
+            collection.clear();
+            if(!searchText.getText().toString().isEmpty()) {
+                reference.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DataSnapshot snapshot = task.getResult();
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            PokeCard card = child.getValue(PokeCard.class);
+                            if (card != null) {
+                                String name = card.getName();
+                                if (name.equals(searchText.getText().toString())) {
+                                    collection.add(card);
+                                }
+                            }
+                        }
+                        try {
+                            if (collection.size() > 0) {
+                                setCollectionBitMaps();
+                            }
+                            else{
+                                Toast.makeText(getContext(), "No cards found!", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    }
+                });
+
+            }
+            else{
+                Toast.makeText(getContext(), "Cleared!", Toast.LENGTH_LONG).show();
+                loadDataFromDatabase();
+            }
+            updateRecyclerView();
         });
 
         filterBtn.setOnClickListener(v -> Toast.makeText(getContext(), "Filter button clicked!", Toast.LENGTH_LONG).show());
@@ -108,6 +143,9 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     }
 
     public void loadDataFromDatabase() {
+        cardIds.clear();
+        collectionIdxQueue.clear();
+        collection.clear();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER);
         reference.get().addOnCompleteListener(task -> {
