@@ -1,194 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/teal_700">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/form_layout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/background_no_logo">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/form_layout"
-            android:layout_width="fill_parent"
+        <ImageView
+            android:id="@+id/pokeimage"
+            android:layout_width="262dp"
+            android:layout_height="273dp"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:src="@drawable/loading" />
+
+        <TextView
+            android:id="@+id/displayname"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            android:layout_below="@+id/pokeimage"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textSize="30dp" />
 
-    <ImageView
-        android:id="@+id/pokeimage"
-        android:layout_width="262dp"
-        android:layout_height="273dp"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:src="@drawable/loading"
-        />
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/displayname"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="52dp"
+            android:text="Card Number / Rarity: "
+            android:textSize="15dp" />
 
+        <TextView
+            android:id="@+id/numberandrarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/displayname"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="52dp"
+            android:layout_toEndOf="@+id/textview"
+            android:textSize="15dp" />
 
+        <TextView
+            android:id="@+id/typehpstage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/numberandrarity"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="17dp"
+            android:layout_toEndOf="@+id/textview1"
+            android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/displayname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pokeimage"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:layout_centerInParent="true"
+        <TextView
+            android:id="@+id/attacks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/typehpstage"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/textview2"
+            android:textSize="15dp" />
 
-        android:textSize="30dp" />
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:text="Card Type / HP / Stage: "
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/displayname"
-                android:layout_marginTop="52dp"
-                android:text="Card Number / Rarity: "
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview1"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="22dp"
+            android:text="Attacks: "
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/numberandrarity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/displayname"
-                android:layout_marginStart="62dp"
-                android:layout_marginTop="52dp"
-                android:layout_toEndOf="@+id/textview"
+        <TextView
+            android:id="@+id/textview3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attacks"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:text="Weakness / Resistance: "
+            android:textSize="15dp" />
 
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/weaknessandresistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attacks"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/textview3"
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/typehpstage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/numberandrarity"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="17dp"
-                android:layout_toEndOf="@+id/textview1"
-
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/attacks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/typehpstage"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@+id/textview2"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/textview1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview"
-                android:layout_marginTop="16dp"
-                android:text="Card Type / HP / Stage: "
-                android:textSize="15dp" />
-
-
-            <TextView
-                android:id="@+id/textview2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview1"
-                android:layout_marginTop="22dp"
-                android:text="Attacks: "
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/textview3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/attacks"
-                android:layout_marginTop="15dp"
-                android:text="Weakness / Resistance: "
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/weaknessandresistance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/attacks"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview3"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/textview4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview3"
-                android:layout_marginTop="15dp"
-                android:text="Normal Price: "
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textview4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview3"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:text="Normal Price: "
+            android:textSize="15dp" />
 
 
-            <TextView
-                android:id="@+id/nprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/weaknessandresistance"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview4"
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/nprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/weaknessandresistance"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/textview4"
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/textview5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview4"
-                android:layout_marginTop="15dp"
-                android:text="Holofoil Price: "
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textview5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview4"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:text="Holofoil Price: "
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/hprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/nprice"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview5"
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/hprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nprice"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/textview5"
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/textview6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview5"
-                android:layout_marginTop="15dp"
-                android:text="Reverse Holofoil Price: "
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textview6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview5"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:text="Reverse Holofoil Price: "
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/rhprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/hprice"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview6"
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/rhprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hprice"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/textview6"
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/textview7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview6"
-                android:layout_marginTop="15dp"
-                android:text="1st Edition Holofoil Price: "
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textview7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview6"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:text="1st Edition Holofoil Price: "
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/fedhprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rhprice"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview7"
-                android:textSize="15dp" />
+        <TextView
+            android:id="@+id/fedhprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rhprice"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/textview7"
+            android:textSize="15dp" />
 
-
-        </RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>
+</ScrollView>
 
