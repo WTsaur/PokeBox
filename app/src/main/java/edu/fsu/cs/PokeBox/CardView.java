@@ -15,14 +15,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CardView extends MainActivity{
     private ImageView pokecardimage, pokecardimageclick;
     private TextView Tname, Tnumberandrarity, Ttypehpstage, Tattacks, Tweaknessandresistance, Tprice, text;
-    private String url, name, hp, number, rarity, type, stage, attacks, weakness, resistance, normalprice, holoprice, reverseholoprice, firsteditionholoprice;
+    private String id, url, name, hp, number, rarity, type, stage, attacks, weakness, resistance, normalprice, holoprice, reverseholoprice, firsteditionholoprice;
     private String result;
+
+    private PokeCard selectedCard;
 
     //TODO: Add to watchlist menu, delete option in the menu...?
 
@@ -51,6 +61,7 @@ public class CardView extends MainActivity{
             }});
 
         //showing the card image and pokemon name
+        id = intent.getStringExtra("id");
         url = intent.getStringExtra("imageurl");
         name = intent.getStringExtra("name");
         Tname = (TextView) findViewById(R.id.displayname);
@@ -148,6 +159,38 @@ public class CardView extends MainActivity{
                 finish();
                 return true;
             case R.id.addwatchlist:
+                //Create a pokecard
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER);
+                reference.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DataSnapshot snapshot = task.getResult();
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            PokeCard card = child.getValue(PokeCard.class);
+                            if (card != null) {
+                                String cid = card.getId();
+                                System.out.println("This is the cid = " + cid);
+                                if (cid.equals(id)) {
+                                    System.out.println("Do i finally get here?");
+                                    //get the pokecard
+                                    selectedCard = card;
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    }
+                });
+
+                //adding to watchlist
+                if(selectedCard != null) {
+                    System.out.println("BRO AM I HERE????");
+
+                //    reference.setValue(selectedCard);
+                }
+                else Toast.makeText(this, "An error has occurred", Toast.LENGTH_LONG).show();
+
                 Toast.makeText(this, "Add to watchlist clicked", Toast.LENGTH_LONG).show();
                 return true;
         }
@@ -161,5 +204,10 @@ public class CardView extends MainActivity{
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
+
+
+
+
 
 }

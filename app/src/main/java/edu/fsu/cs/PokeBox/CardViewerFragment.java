@@ -204,6 +204,7 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         b.putString("hp", collection.get(position).getHp());
         b.putString("rarity", collection.get(position).getRarity());
         b.putString("number", collection.get(position).getNumber());
+        b.putString("id", collection.get(position).getId());
 
         StringBuilder sb = new StringBuilder();
         sb.setLength(0);
