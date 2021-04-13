@@ -9,5 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="custom_red">#FE3B3B</color>
-
+    <color name="background_pink">#F35AA4</color>
+    <color name="background_teal">#5AF0F3</color>
+    <color name="background_purple">#AA5AF3</color>
+    <color name="background_blue">#5AA4F3</color>
 </resources>

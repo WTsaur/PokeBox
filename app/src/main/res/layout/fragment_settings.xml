@@ -14,16 +14,18 @@
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="500dp"
+            android:layout_below="@id/changepassword"
+            android:layout_marginTop="35dp"
             android:layout_centerHorizontal="true"
-            android:background="@color/red"
+            android:backgroundTint="@color/background_pink"
+            android:textColor="@color/white"
             android:text="Logout"/>
 
     <TextView
             android:id="@+id/displayemail"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:gravity="center"
             android:text="Email"
             android:textColor="@color/black"/>
@@ -38,6 +40,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:backgroundTint="@color/black"
+            android:gravity="center"
             android:ems="10"
             android:inputType="textPassword"
             android:hint="Old Password"/>
@@ -49,6 +52,7 @@
             android:layout_below="@+id/oldp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
+            android:gravity="center"
             android:ems="10"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -64,6 +68,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
             android:textColor="@color/black"
+            android:gravity="center"
             android:textColorHint="@color/black"
             android:backgroundTint="@color/black"
             android:ems="10"
@@ -77,6 +82,8 @@
             android:layout_below="@+id/newcp"
             android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/background_purple"
+            android:textColor="@color/white"
             android:text="Change Password"/>
 
 

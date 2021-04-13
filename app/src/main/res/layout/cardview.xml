@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/teal_700">
+            android:layout_height="fill_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:background="@color/background_teal">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/form_layout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp">
+    <RelativeLayout
+            android:id="@+id/form_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:padding="10dp">
 
         <ImageView
                 android:id="@+id/pokeimage"
@@ -17,178 +18,285 @@
                 android:layout_height="273dp"
                 android:layout_centerHorizontal="true"
                 android:clickable="true"
-                android:src="@drawable/loading"/>
+                android:src="@drawable/loading"
+                android:focusable="true"/>
 
-        <TextView
-                android:id="@+id/displayname"
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/pokeimage"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:textSize="30dp"/>
+                app:cardElevation="8dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="6dp"
+                app:cardBackgroundColor="#FF80BD"
+                android:layout_below="@id/pokeimage"
+                android:layout_centerHorizontal="true">
 
-        <TextView
-                android:id="@+id/textview"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/displayname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="30sp"
+                        android:textColor="@color/white"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_numAndRarity"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/displayname"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="52dp"
-                android:text="Card Number / Rarity: "
-                android:textSize="15dp"/>
+                app:cardElevation="8dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="6dp"
+                app:cardBackgroundColor="@color/background_pink"
+                android:layout_below="@id/card_Name">
 
-        <TextView
-                android:id="@+id/numberandrarity"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/card_number_rarity"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+                <TextView
+                        android:id="@+id/numberandrarity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_TypeHPStage"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/displayname"
-                android:layout_marginStart="62dp"
-                android:layout_marginTop="52dp"
-                android:layout_toEndOf="@+id/textview"
-                android:textSize="15dp"/>
+                app:cardElevation="8dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="6dp"
+                app:cardBackgroundColor="#D54F90"
+                android:layout_below="@id/card_numAndRarity">
 
-        <TextView
-                android:id="@+id/typehpstage"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/textview1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/card_type_hp_stage"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+                <TextView
+                        android:id="@+id/typehpstage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_Attacks"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/numberandrarity"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="17dp"
-                android:layout_toEndOf="@+id/textview1"
-                android:textSize="15dp"/>
+                app:cardElevation="8dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="6dp"
+                app:cardBackgroundColor="#B6447B"
+                android:layout_below="@id/card_TypeHPStage">
 
-        <TextView
-                android:id="@+id/attacks"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/textview2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/attacks"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+                <TextView
+                        android:id="@+id/attacks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textview2"
+                        android:layout_marginStart="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_WeakResist"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/typehpstage"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@+id/textview2"
-                android:textSize="15dp"/>
+                app:cardElevation="8dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="6dp"
+                app:cardBackgroundColor="#983867"
+                android:layout_below="@id/card_Attacks">
 
-        <TextView
-                android:id="@+id/textview1"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                <TextView
+                        android:id="@+id/textview3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weakness_resistance"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+                <TextView
+                        android:id="@+id/weaknessandresistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="10dp"
+                        android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_Prices"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textview"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="16dp"
-                android:text="Card Type / HP / Stage: "
-                android:textSize="15dp"/>
+                app:cardElevation="8dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="6dp"
+                app:cardBackgroundColor="#792D52"
+                android:layout_below="@id/card_WeakResist">
 
-        <TextView
-                android:id="@+id/textview2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview1"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="22dp"
-                android:text="Attacks: "
-                android:textSize="15dp"/>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
-        <TextView
-                android:id="@+id/textview3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/attacks"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Weakness / Resistance: "
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/textView_marketPrices"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:text="@string/market_prices"/>
 
-        <TextView
-                android:id="@+id/weaknessandresistance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/attacks"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview3"
-                android:textSize="15dp"/>
-
-        <TextView
-                android:id="@+id/textview4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview3"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Normal Price: "
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/textview4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_marketPrices"
+                        android:text="@string/normal"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
 
 
-        <TextView
-                android:id="@+id/nprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/weaknessandresistance"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview4"
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/nprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_marketPrices"
+                        android:layout_toEndOf="@+id/textview4"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="10dp"
+                        android:textSize="15sp"/>
 
-        <TextView
-                android:id="@+id/textview5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview4"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Holofoil Price: "
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/textview5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textview4"
+                        android:text="@string/holofoil"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
 
-        <TextView
-                android:id="@+id/hprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/nprice"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview5"
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/hprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textview4"
+                        android:layout_toEndOf="@+id/textview5"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
 
-        <TextView
-                android:id="@+id/textview6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview5"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Reverse Holofoil Price: "
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/textview6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textview5"
+                        android:text="@string/reverse_holofoil"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
 
-        <TextView
-                android:id="@+id/rhprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/hprice"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview6"
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/rhprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textview5"
+                        android:layout_toEndOf="@+id/textview6"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
 
-        <TextView
-                android:id="@+id/textview7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview6"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:text="1st Edition Holofoil Price: "
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/textview7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textview6"
+                        android:text="@string/_1st_edition_holofoil"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
 
-        <TextView
-                android:id="@+id/fedhprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rhprice"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/textview7"
-                android:textSize="15dp"/>
+                <TextView
+                        android:id="@+id/fedhprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textview6"
+                        android:layout_toEndOf="@+id/textview7"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 </ScrollView>

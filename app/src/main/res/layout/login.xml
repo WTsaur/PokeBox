@@ -18,7 +18,7 @@
         android:layout_height="82dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="158dp"
-        android:textColor="@color/black"
+        android:textColor="@color/background_purple"
         android:gravity="center"
         android:text="@string/loginBold"
         android:textSize="30sp" />
@@ -62,6 +62,8 @@
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
+        android:backgroundTint="@color/background_pink"
+        android:textColor="@color/white"
         android:text="@string/login" />
 
     <LinearLayout

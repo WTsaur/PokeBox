@@ -20,7 +20,7 @@
             android:layout_marginTop="158dp"
             android:gravity="center"
             android:textSize="30sp"
-            android:textColor="@color/black"
+            android:textColor="@color/background_purple"
             android:text="@string/registerBold"/>
 
     <EditText
@@ -78,6 +78,8 @@
             android:layout_below="@+id/cpassword"
             android:layout_marginTop="19dp"
             android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/background_pink"
+            android:textColor="@color/white"
             android:text="@string/register"/>
 
         <LinearLayout

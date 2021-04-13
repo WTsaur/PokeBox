@@ -57,6 +57,8 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         loadingText = view.findViewById(R.id.loading_text);
         rv = view.findViewById(R.id.card_viewer_recycler);
 
+        loadingText.setTextColor(getResources().getColor(R.color.background_pink));
+
         // set up listeners
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER);
@@ -239,9 +241,12 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
 
         //get card attack strings
         List<Object> attacks = collection.get(position).getAttacks();
+        int count = 0;
         for (Object attack : attacks) {
             sb.append((String) attack);
-            sb.append("\n");
+            if (count++ != attacks.size() - 1) {
+                sb.append("\n");
+            }
         }
         b.putString("attacks", sb.toString());
         sb.setLength(0);

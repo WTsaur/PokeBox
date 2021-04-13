@@ -128,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/watch_1stRevHolo"
-                    android:text="@string/_1st_ed_reverse_holofoil"
+                    android:text="@string/_1st_edition_holofoil"
                     android:layout_marginStart="30dp"
                     android:textSize="14sp"
                     android:textColor="@color/teal_700"/>

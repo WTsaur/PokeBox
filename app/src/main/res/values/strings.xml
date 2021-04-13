@@ -5,7 +5,7 @@
     <string name="settings_fragment">Settings Fragment</string>
     <string name="watchlist_fragment">Watchlist Fragment</string>
     <string name="background_for_camera_fragment">background for camera fragment</string>
-    <string name="camera_launch_button_text">Scan a Card!</string>
+    <string name="camera_launch_button_text">Scan a Card</string>
     <string name="loading">Loading…</string>
     <string name="imgView_cardSelection_description">displays user selected card</string>
     <string name="back">Back</string>
@@ -23,10 +23,15 @@
     <string name="button_for_searchedittext">button for searchEditText</string>
     <string name="button_for_filtering_card_collection_data">button for filtering card collection data</string>
     <string name="search">Search…</string>
-    <string name="_1st_ed_reverse_holofoil">1st Edition Reverse Holofoil:</string>
     <string name="reverse_holofoil">Reverse Holofoil:</string>
     <string name="holofoil">Holofoil:</string>
     <string name="normal">Normal:</string>
     <string name="add_to_watchlist">Add to Watchlist</string>
     <string name="delete_card">Delete Card</string>
+    <string name="attacks">Attacks:</string>
+    <string name="weakness_resistance">Weakness / Resistance:</string>
+    <string name="market_prices">Market Prices</string>
+    <string name="_1st_edition_holofoil">1st Edition Holofoil:</string>
+    <string name="card_number_rarity">Card Number / Rarity:</string>
+    <string name="card_type_hp_stage">Card Type / HP / Stage:</string>
 </resources>

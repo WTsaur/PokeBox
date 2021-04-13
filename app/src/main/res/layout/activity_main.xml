@@ -17,10 +17,11 @@
             android:id="@+id/navigation_tabs"
             style="@style/Widget.MaterialComponents.TabLayout.Colored"
             app:tabIndicatorGravity="top"
-            app:tabIndicatorColor="@color/purple_700"
-            app:tabIndicatorHeight="5dp"
+            app:tabIndicatorColor="@color/background_pink"
+            app:tabIndicatorHeight="7dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@color/background_teal"/>
 
 </LinearLayout>

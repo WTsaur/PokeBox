@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/loading_text"
         android:text="@string/loading"
-        android:textColor="@color/purple_200"
+        android:textColor="@color/background_pink"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="150dp"

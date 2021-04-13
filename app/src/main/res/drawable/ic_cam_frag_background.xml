@@ -40,25 +40,25 @@
     <path
         android:pathData="M509.39 +1012.85C510.353 +1016.25 +510.374 +1020.24 +511.971 +1023.24C552.725 +1021.58 +594.082 +1021.7 +634.988 +1020.16C642.675 +1020.62 +642.751 +997.557 +635.093 +997.93C593.435 +1001.28 +551.327 +997.03 +509.819 +1001.36C507.719 +1004.37 +509.76 +1009.16 +509.39 +1012.85"
         android:fillType="evenOdd"
-        android:fillColor="#E7378D"
+        android:fillColor="#F35AA4"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
         android:pathData="M790.893 +1014.44C791.498 +1017.93 +790.895 +1022.09 +792.298 +1025.16C835.984 +1030.19 +879.034 +1016.77 +922.723 +1019.33C930.526 +1019.33 +930.009 +996.33 +922.134 +997.109C878.737 +995.853 +836.252 +1006.11 +792.795 +1003.08C790.233 +1005.68 +791.752 +1010.85 +790.893 +1014.44"
         android:fillType="evenOdd"
-        android:fillColor="#E7378D"
+        android:fillColor="#F35AA4"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
         android:pathData="M520.234 +977.116C525.332 +974.788 +534.845 +975.937 +536.751 +971.081C541.259 +941.177 +554.328 +912.298 +571.03 +887.108C643.331 +743.032 +924.488 +803.753 +902.846 +973.656C912.952 +976.626 +924.105 +977.011 +934.258 +974.083C961.311 +774.824 +634.381 +696.851 +542.901 +866.549C521.981 +898.021 +505.75 +934.784 +503.202 +972.694C508.373 +974.508 +514.554 +975.937 +520.234 +977.116"
         android:fillType="evenOdd"
-        android:fillColor="#39B5EC"
+        android:fillColor="#5AA4F3"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
         android:pathData="M923.346 +1042.84C918.248 +1045.17 +908.735 +1044.02 +906.829 +1048.87C902.321 +1078.78 +889.252 +1107.66 +872.55 +1132.85C800.249 +1276.92 +519.092 +1216.2 +540.734 +1046.3C530.629 +1043.33 +519.475 +1042.94 +509.323 +1045.87C482.27 +1245.13 +809.199 +1323.1 +900.679 +1153.41C921.599 +1121.93 +937.83 +1085.17 +940.378 +1047.26C935.208 +1045.45 +929.026 +1044.02 +923.346 +1042.84"
         android:fillType="evenOdd"
-        android:fillColor="#A577F6"
+        android:fillColor="#AA5AF3"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
@@ -88,7 +88,7 @@
     <path
         android:pathData="M653.299 +1011.2C653.299 +976.953 +681.442 +949.194 +716.158 +949.194C750.874 +949.194 +779.017 +976.953 +779.017 +1011.2C779.017 +1045.44 +750.874 +1073.2 +716.158 +1073.2C681.442 +1073.2 +653.299 +1045.44 +653.299 +1011.2Z"
         android:fillType="evenOdd"
-        android:fillColor="#E7378D"
+        android:fillColor="#F35AA4"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
