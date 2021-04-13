@@ -18,10 +18,11 @@
         android:layout_height="82dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="158dp"
-        android:textColor="@color/background_purple"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:gravity="center"
         android:text="@string/loginBold"
-        android:textSize="30sp" />
+        android:textSize="30sp"/>
 
     <EditText
             android:id="@+id/email"
@@ -30,9 +31,9 @@
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="19dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="#F4E0B1"
+            android:backgroundTint="#F4E0B1"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/email"
@@ -47,9 +48,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="9dp"
             android:ems="10"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="#F4E0B1"
+            android:backgroundTint="#F4E0B1"
             android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -62,8 +63,9 @@
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
-        android:backgroundTint="@color/background_pink"
+        android:backgroundTint="@color/custom_red"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:text="@string/login" />
 
     <LinearLayout
@@ -79,7 +81,7 @@
             android:id="@+id/textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="@string/new_user" />
 
         <Button
@@ -88,7 +90,7 @@
             android:layout_height="wrap_content"
             android:background="#0000"
             android:text="@string/register"
-            android:textColor="#0000FF"
+            android:textColor="#F4E0B1"
             android:textSize="12sp" />
     </LinearLayout>
 

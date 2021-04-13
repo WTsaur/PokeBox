@@ -36,13 +36,18 @@ public class CardView extends MainActivity{
     private String reverseholoprice;
     private String firsteditionholoprice;
 
+    private final String currency = "$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardview);
 
-        //setting the back button on action bar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().show();
+            //setting the back button on action bar
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
         //setting the loading animation for card image
@@ -100,24 +105,29 @@ public class CardView extends MainActivity{
         firsteditionholoprice = intent.getStringExtra("fedhprice");
 
         TextView tprice;
+        String price;
         if(normalprice != null){
             tprice = findViewById(R.id.nprice);
-            tprice.setText(normalprice);
+            price = currency + normalprice;
+            tprice.setText(price);
         }
 
         if(holoprice != null){
             tprice = findViewById(R.id.hprice);
-            tprice.setText(holoprice);
+            price = currency + holoprice;
+            tprice.setText(price);
         }
 
         if(reverseholoprice != null){
             tprice = findViewById(R.id.rhprice);
-            tprice.setText(reverseholoprice);
+            price = currency + reverseholoprice;
+            tprice.setText(price);
         }
 
         if(firsteditionholoprice != null){
             tprice = findViewById(R.id.fedhprice);
-            tprice.setText(firsteditionholoprice);
+            price = currency + firsteditionholoprice;
+            tprice.setText(price);
         }
     }
 

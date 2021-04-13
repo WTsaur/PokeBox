@@ -16,12 +16,12 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:padding="5dp"
-            android:backgroundTint="@color/background_pink"
+            android:backgroundTint="#E46570"
             android:text="@string/camera_launch_button_text"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:layout_below="@+id/scanner_card_recycler"
-            android:layout_marginTop="15dp"
             android:layout_centerHorizontal="true"
             android:visibility="visible"/>
 
@@ -29,7 +29,7 @@
               android:layout_height="wrap_content"
               android:id="@+id/loading_text"
               android:text="@string/loading"
-              android:textColor="@color/background_pink"
+              android:textColor="@color/white"
               android:layout_centerHorizontal="true"
               android:layout_below="@+id/capture"
               android:layout_margin="15dp"

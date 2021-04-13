@@ -58,7 +58,7 @@ public class WatchlistFragment extends Fragment {
         // set up item touch helper
         ItemTouchHelper.SimpleCallback touchHelperCallBack = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-            private final ColorDrawable background = new ColorDrawable(getResources().getColor(R.color.custom_red));
+            private final ColorDrawable background = new ColorDrawable(getResources().getColor(R.color.custom_red_delete));
             private final Drawable deleteIcon = ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.ic_baseline_delete_24);
 
             @Override

@@ -53,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        View decorView = getWindow().getDecorView();
+        decorView.setBackgroundColor(getResources().getColor(R.color.custom_gray));
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mAuth = FirebaseAuth.getInstance();           //for user authentication
 
         CURRENT_USER = "NONE";

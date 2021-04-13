@@ -8,9 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
-    <color name="custom_red">#FE3B3B</color>
+    <color name="custom_red">#E46570</color>
+    <color name="custom_red_delete">#F84454</color>
     <color name="background_pink">#F35AA4</color>
     <color name="background_teal">#5AF0F3</color>
     <color name="background_purple">#AA5AF3</color>
     <color name="background_blue">#5AA4F3</color>
+    <color name="light_pale_yellow">#F4E0B1</color>
+    <color name="custom_gray">#4A4A4F</color>
 </resources>

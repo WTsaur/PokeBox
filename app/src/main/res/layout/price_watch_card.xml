@@ -8,8 +8,8 @@
         app:cardCornerRadius="10dp"
         android:elevation="12dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@color/white"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="#F37F86"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp">
 
@@ -27,7 +27,8 @@
                 android:text="ID"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"
-                android:textColor="@color/teal_700"/>
+                android:textStyle="bold"
+                android:textColor="#043135"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -36,7 +37,8 @@
                 android:text="Name"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
-                android:textColor="@color/teal_200"/>
+                android:textStyle="bold"
+                android:textColor="@color/light_pale_yellow"/>
 
     </LinearLayout>
 
@@ -59,7 +61,8 @@
                     android:text="@string/normal"
                     android:layout_marginStart="30dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_700"/>
+                    android:textStyle="bold"
+                    android:textColor="#043135"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -68,7 +71,8 @@
                     android:text="$"
                     android:layout_marginStart="5dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_200"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/light_pale_yellow"/>
 
         </LinearLayout>
 
@@ -83,7 +87,8 @@
                     android:text="@string/holofoil"
                     android:layout_marginStart="30dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_700"/>
+                    android:textStyle="bold"
+                    android:textColor="#043135"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -92,7 +97,8 @@
                     android:text="$"
                     android:layout_marginStart="5dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_200"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/light_pale_yellow"/>
 
         </LinearLayout>
 
@@ -107,7 +113,8 @@
                     android:text="@string/reverse_holofoil"
                     android:layout_marginStart="30dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_700"/>
+                    android:textStyle="bold"
+                    android:textColor="#043135"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -116,7 +123,8 @@
                     android:text="$"
                     android:layout_marginStart="5dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_200"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/light_pale_yellow"/>
 
         </LinearLayout>
 
@@ -131,7 +139,8 @@
                     android:text="@string/_1st_edition_holofoil"
                     android:layout_marginStart="30dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_700"/>
+                    android:textStyle="bold"
+                    android:textColor="#043135"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -140,7 +149,8 @@
                     android:text="$"
                     android:layout_marginStart="5dp"
                     android:textSize="14sp"
-                    android:textColor="@color/teal_200"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/light_pale_yellow"/>
 
         </LinearLayout>
 

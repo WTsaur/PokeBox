@@ -20,7 +20,8 @@
             android:layout_marginTop="158dp"
             android:gravity="center"
             android:textSize="30sp"
-            android:textColor="@color/background_purple"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:text="@string/registerBold"/>
 
     <EditText
@@ -32,9 +33,9 @@
             android:layout_marginTop="19dp"
             android:ems="10"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_pale_yellow"
+            android:backgroundTint="@color/light_pale_yellow"
             android:inputType="textEmailAddress"
             android:hint="@string/email"
             android:importantForAutofill="no"/>
@@ -48,9 +49,9 @@
             android:layout_centerHorizontal="true"
             android:ems="10"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_pale_yellow"
+            android:backgroundTint="@color/light_pale_yellow"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:importantForAutofill="no"/>
@@ -63,9 +64,9 @@
             android:layout_marginTop="9dp"
             android:layout_centerHorizontal="true"
             android:ems="10"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_pale_yellow"
+            android:backgroundTint="@color/light_pale_yellow"
             android:gravity="center"
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
@@ -78,7 +79,7 @@
             android:layout_below="@+id/cpassword"
             android:layout_marginTop="19dp"
             android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/background_pink"
+            android:backgroundTint="@color/custom_red"
             android:textColor="@color/white"
             android:text="@string/register"/>
 
@@ -94,7 +95,7 @@
                     android:id="@+id/existinguser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:text="@string/existing_user"/>
 
             <Button
@@ -103,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:background="#0000"
                     android:text="@string/login"
-                    android:textColor="#0000FF"
+                    android:textColor="@color/light_pale_yellow"
                     android:textSize="12sp"/>
         </LinearLayout>
 

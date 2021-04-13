@@ -17,8 +17,9 @@
             android:layout_below="@id/changepassword"
             android:layout_marginTop="35dp"
             android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/background_pink"
+            android:backgroundTint="@color/custom_red"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="Logout"/>
 
     <TextView
@@ -28,7 +29,8 @@
             android:textSize="25sp"
             android:gravity="center"
             android:text="Email"
-            android:textColor="@color/black"/>
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
     <EditText
             android:id="@+id/oldp"
@@ -37,9 +39,9 @@
             android:layout_below="@+id/displayemail"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="41dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="#F4E0B1"
+            android:backgroundTint="#F4E0B1"
             android:gravity="center"
             android:ems="10"
             android:inputType="textPassword"
@@ -54,9 +56,9 @@
             android:layout_marginTop="11dp"
             android:gravity="center"
             android:ems="10"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="#F4E0B1"
+            android:backgroundTint="#F4E0B1"
             android:hint="New Password"
             android:inputType="textPassword"/>
 
@@ -67,10 +69,10 @@
             android:layout_below="@+id/newp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:gravity="center"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
+            android:textColorHint="#F4E0B1"
+            android:backgroundTint="#F4E0B1"
             android:ems="10"
             android:hint="Confirm Password"
             android:inputType="textPassword"/>
@@ -82,8 +84,9 @@
             android:layout_below="@+id/newcp"
             android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/background_purple"
+            android:backgroundTint="@color/custom_red"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="Change Password"/>
 
 

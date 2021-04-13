@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:background="@color/background_teal">
+            android:background="#4A4A4F">
 
     <RelativeLayout
             android:id="@+id/form_layout"
@@ -28,7 +28,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#FF80BD"
+                app:cardBackgroundColor="#F4E0B1"
                 android:layout_below="@id/pokeimage"
                 android:layout_centerHorizontal="true">
 
@@ -44,7 +44,9 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30sp"
-                        android:textColor="@color/white"/>
+                        android:text="Name"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"/>
 
             </RelativeLayout>
 
@@ -57,7 +59,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="@color/background_pink"
+                app:cardBackgroundColor="#F4E0B1"
                 android:layout_below="@id/card_Name">
 
             <RelativeLayout
@@ -70,7 +72,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/card_number_rarity"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -78,7 +81,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:textSize="15sp"/>
 
             </RelativeLayout>
@@ -92,7 +96,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#D54F90"
+                app:cardBackgroundColor="#F4E0B1"
                 android:layout_below="@id/card_numAndRarity">
 
             <RelativeLayout
@@ -105,7 +109,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/card_type_hp_stage"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -113,7 +118,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:textSize="15sp"/>
 
             </RelativeLayout>
@@ -127,7 +133,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#B6447B"
+                app:cardBackgroundColor="#F4E0B1"
                 android:layout_below="@id/card_TypeHPStage">
 
             <RelativeLayout
@@ -141,7 +147,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/attacks"
                         android:layout_centerHorizontal="true"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -151,7 +158,8 @@
                         android:layout_below="@+id/textview2"
                         android:layout_marginStart="10dp"
                         android:layout_centerHorizontal="true"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:textSize="15sp"/>
 
             </RelativeLayout>
@@ -165,7 +173,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#983867"
+                app:cardBackgroundColor="#F4E0B1"
                 android:layout_below="@id/card_Attacks">
 
             <RelativeLayout
@@ -178,7 +186,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/weakness_resistance"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -186,7 +195,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:layout_marginStart="10dp"
                         android:textSize="15sp"/>
 
@@ -201,7 +211,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#792D52"
+                app:cardBackgroundColor="#F4E0B1"
                 android:layout_below="@id/card_WeakResist">
 
             <RelativeLayout
@@ -214,7 +224,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:text="@string/market_prices"/>
 
                 <TextView
@@ -223,7 +234,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/textView_marketPrices"
                         android:text="@string/normal"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
 
@@ -233,7 +245,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/textView_marketPrices"
                         android:layout_toEndOf="@+id/textview4"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:layout_marginStart="10dp"
                         android:textSize="15sp"/>
 
@@ -243,7 +256,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/textview4"
                         android:text="@string/holofoil"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -253,7 +267,8 @@
                         android:layout_below="@id/textview4"
                         android:layout_toEndOf="@+id/textview5"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -262,7 +277,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/textview5"
                         android:text="@string/reverse_holofoil"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -272,7 +288,8 @@
                         android:layout_below="@id/textview5"
                         android:layout_toEndOf="@+id/textview6"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -281,7 +298,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/textview6"
                         android:text="@string/_1st_edition_holofoil"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#462E1D"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -291,7 +309,8 @@
                         android:layout_below="@id/textview6"
                         android:layout_toEndOf="@+id/textview7"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textColor="#4A4A4F"
                         android:textSize="15sp"/>
 
             </RelativeLayout>
