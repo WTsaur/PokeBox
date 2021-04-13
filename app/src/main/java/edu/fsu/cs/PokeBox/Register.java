@@ -52,34 +52,34 @@ public class Register extends MainActivity {
                                     // if user enters weak password
                                     catch (FirebaseAuthWeakPasswordException weakPassword)
                                     {
-                                        Toast.makeText(Register.this, "Weak password", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Weak password", Toast.LENGTH_SHORT).show();
                                     }
 
                                     // if user enters wrong email.
                                     catch (FirebaseAuthInvalidCredentialsException malformedEmail)
                                     {
-                                        Toast.makeText(Register.this, "Invalid Email", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Invalid Email", Toast.LENGTH_SHORT).show();
                                     }
                                     // if user enters existing email.
                                     catch (FirebaseAuthUserCollisionException existEmail)
                                     {
-                                        Toast.makeText(Register.this, "Email already exists" , Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Email already exists" , Toast.LENGTH_SHORT).show();
                                     }
                                     catch (Exception e)
                                     {
-                                        Toast.makeText(Register.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 else {
-                                    Toast.makeText(Register.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Register.this, "Successfully registered", Toast.LENGTH_SHORT).show();
                                     load(); //update ui
                                 }
                             }
                     );
                 }
-                else Toast.makeText(Register.this, "Password does not match confirm password" , Toast.LENGTH_LONG).show();
+                else Toast.makeText(Register.this, "Password does not match confirm password" , Toast.LENGTH_SHORT).show();
             }
-            else  Toast.makeText(Register.this, "Please fill in all fields" , Toast.LENGTH_LONG).show();
+            else  Toast.makeText(Register.this, "Please fill in all fields" , Toast.LENGTH_SHORT).show();
         });
 
        //clicking on login button

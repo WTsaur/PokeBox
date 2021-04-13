@@ -25,9 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class SettingsFragment extends Fragment {
     private View view;
     private FirebaseAuth mAuth;
-    private TextView eemail;
     private EditText eoldp, enewp, econfirmp;
-    private Button changepassword;
 
     @Nullable
     @Override
@@ -36,95 +34,63 @@ public class SettingsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         //display email in settings fragment
-        eemail = (TextView) view.findViewById(R.id.displayemail);
+        TextView eemail = view.findViewById(R.id.displayemail);
         if(mAuth.getCurrentUser() != null){
             eemail.setText(mAuth.getCurrentUser().getEmail());
 
         }
 
+        Button changepassword = view.findViewById(R.id.changepassword);
+        changepassword.setOnClickListener(v -> {
+            //getting the old and new password from edittext
+            eoldp = view.findViewById(R.id.oldp);
+            enewp = view.findViewById(R.id.newp);
+            econfirmp = view.findViewById(R.id.newcp);
+            String oldpass = eoldp.getText().toString();
+            String newpass = enewp.getText().toString();
+            String confirmpass = econfirmp.getText().toString();
 
-
-
-        changepassword = (Button) view.findViewById(R.id.changepassword);
-        changepassword.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //getting the old and new password from edittext
-                eoldp = (EditText) view.findViewById(R.id.oldp);
-                enewp = (EditText) view.findViewById(R.id.newp);
-                econfirmp = (EditText) view.findViewById(R.id.newcp);
-                String oldpass = eoldp.getText().toString();
-                String newpass = enewp.getText().toString();
-                String confirmpass = econfirmp.getText().toString();
-                Log.e("OLD PASSWORD: ", oldpass);
-                Log.e("NEW PASSWORD: ", newpass);
-
-
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(!oldpass.isEmpty() && !newpass.isEmpty() && !confirmpass.isEmpty()){
-                    AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), oldpass);
-                    // Prompt the user to re-provide their sign-in credentials
-                    user.reauthenticate(credential)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()) {
-                                        Log.e("Re-authentication", "User re-authenticated.");
-                                        if (newpass.equals(confirmpass)) {
-                                            user.updatePassword(newpass)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                Toast.makeText(getContext(), "Password Changed", Toast.LENGTH_LONG).show();
-                                                                Log.e("CHANGE PASSWORD: ", "True");
-
-                                                            }
-                                                            else  Toast.makeText(getContext(), "There was a problem", Toast.LENGTH_LONG).show();
-                                                        }
-                                                    });
-
-                                        } else {
-                                            Toast.makeText(getContext(), "New password does not meet confirm password", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                    else{
-                                        Toast.makeText(getContext(), "Old password incorrect", Toast.LENGTH_LONG).show();
-                                    }
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if(!oldpass.isEmpty() && !newpass.isEmpty() && !confirmpass.isEmpty()){
+                AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), oldpass);
+                // Prompt the user to re-provide their sign-in credentials
+                user.reauthenticate(credential)
+                        .addOnCompleteListener(task -> {
+                            if(task.isSuccessful()) {
+                                if (newpass.equals(confirmpass)) {
+                                    user.updatePassword(newpass)
+                                            .addOnCompleteListener(task1 -> {
+                                                if (task1.isSuccessful()) {
+                                                    Toast.makeText(getContext(), "Password Changed", Toast.LENGTH_SHORT).show();
+                                                }
+                                                else  Toast.makeText(getContext(), "There was a problem", Toast.LENGTH_SHORT).show();
+                                            });
+                                } else {
+                                    Toast.makeText(getContext(), "New password does not meet confirm password", Toast.LENGTH_SHORT).show();
                                 }
-                            });
-
-
-                }
-                else Toast.makeText(getContext(), "Missing information", Toast.LENGTH_LONG).show();
-
-
+                            }
+                            else{
+                                Toast.makeText(getContext(), "Old password incorrect", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
+            else Toast.makeText(getContext(), "Missing information", Toast.LENGTH_SHORT).show();
         });
-
 
         //user is able to logout
-        Button logout = (Button) view.findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                try{
-                    mAuth.signOut();
-                    Toast.makeText(getContext(), "Successfully logged out", Toast.LENGTH_LONG).show();
-                    //update ui
-                    Intent myIntent = new Intent(getContext(), MainActivity.class);
-                    startActivity(myIntent);
-                }
-                catch (Exception e){
-                    Toast.makeText(getContext(), "Issues logging out: " + e, Toast.LENGTH_LONG).show();
-                }
+        Button logout = view.findViewById(R.id.logout);
+        logout.setOnClickListener(v -> {
+            try{
+                mAuth.signOut();
+                Toast.makeText(getContext(), "Successfully logged out", Toast.LENGTH_SHORT).show();
+                //update ui
+                Intent myIntent = new Intent(getContext(), MainActivity.class);
+                startActivity(myIntent);
+            }
+            catch (Exception e){
+                Toast.makeText(getContext(), "Issues logging out: " + e, Toast.LENGTH_SHORT).show();
             }
         });
-
 
         return view;
     }

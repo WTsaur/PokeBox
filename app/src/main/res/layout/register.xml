@@ -20,6 +20,7 @@
             android:layout_marginTop="158dp"
             android:gravity="center"
             android:textSize="30sp"
+            android:textColor="@color/black"
             android:text="@string/registerBold"/>
 
     <EditText
@@ -31,6 +32,9 @@
             android:layout_marginTop="19dp"
             android:ems="10"
             android:gravity="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/black"
             android:inputType="textEmailAddress"
             android:hint="@string/email"
             android:importantForAutofill="no"/>
@@ -44,6 +48,9 @@
             android:layout_centerHorizontal="true"
             android:ems="10"
             android:gravity="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/black"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:importantForAutofill="no"/>
@@ -56,6 +63,9 @@
             android:layout_marginTop="9dp"
             android:layout_centerHorizontal="true"
             android:ems="10"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/black"
             android:gravity="center"
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
@@ -82,6 +92,7 @@
                     android:id="@+id/existinguser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="@string/existing_user"/>
 
             <Button

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/widget_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+
+    <LinearLayout
+            android:id="@+id/item_identity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/watch_id"
+                android:text="ID"
+                android:layout_marginStart="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/teal_700"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/watch_name"
+                android:text="Name"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/teal_200"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/item_priceInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp">
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_normal"
+                    android:text="@string/normal"
+                    android:layout_marginStart="30dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_700"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_normalPrice"
+                    android:text="$"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_200"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_holo"
+                    android:text="@string/holofoil"
+                    android:layout_marginStart="30dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_700"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_holoPrice"
+                    android:text="$"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_200"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_revHolo"
+                    android:text="@string/reverse_holofoil"
+                    android:layout_marginStart="30dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_700"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_revHoloPrice"
+                    android:text="$"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_200"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_1stRevHolo"
+                    android:text="@string/_1st_ed_reverse_holofoil"
+                    android:layout_marginStart="30dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_700"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watch_1stEdRevHoloPrice"
+                    android:text="$"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/teal_200"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -18,6 +18,7 @@
         android:layout_height="82dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="158dp"
+        android:textColor="@color/black"
         android:gravity="center"
         android:text="@string/loginBold"
         android:textSize="30sp" />
@@ -29,6 +30,9 @@
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="19dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/black"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/email"
@@ -43,6 +47,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="9dp"
             android:ems="10"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/black"
             android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -70,6 +77,7 @@
             android:id="@+id/textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/new_user" />
 
         <Button

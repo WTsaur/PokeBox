@@ -1,5 +1,6 @@
 package edu.fsu.cs.PokeBox;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,28 +14,27 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.io.FileNotFoundException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class CardView extends MainActivity{
-    private ImageView pokecardimage, pokecardimageclick;
-    private TextView Tname, Tnumberandrarity, Ttypehpstage, Tattacks, Tweaknessandresistance, Tprice, text;
-    private String id, url, name, hp, number, rarity, type, stage, attacks, weakness, resistance, normalprice, holoprice, reverseholoprice, firsteditionholoprice;
-    private String result;
-
-    private PokeCard selectedCard;
-
-    //TODO: Add to watchlist menu, delete option in the menu...?
+    private String id;
+    private String url;
+    private String name;
+    private String number;
+    private String rarity;
+    private String normalprice;
+    private String holoprice;
+    private String reverseholoprice;
+    private String firsteditionholoprice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,54 +46,52 @@ public class CardView extends MainActivity{
 
         Intent intent = getIntent();
         //setting the loading animation for card image
-        pokecardimage = (ImageView) findViewById(R.id.pokeimage);
+        ImageView pokecardimage = findViewById(R.id.pokeimage);
         Glide.with(this).load(R.drawable.loading).into(pokecardimage);
 
 
-        pokecardimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplication(), ViewImage.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("url", url);
-                i.putExtras(bundle);
-                startActivity(i);
-            }});
+        pokecardimage.setOnClickListener(v -> {
+            Intent i = new Intent(getApplication(), ViewImage.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("url", url);
+            i.putExtras(bundle);
+            startActivity(i);
+        });
 
         //showing the card image and pokemon name
         id = intent.getStringExtra("id");
         url = intent.getStringExtra("imageurl");
         name = intent.getStringExtra("name");
-        Tname = (TextView) findViewById(R.id.displayname);
-        Tname.setText(name);
-        new DownloadImageTask((ImageView) findViewById(R.id.pokeimage)).execute(url);
+        TextView tname = findViewById(R.id.displayname);
+        tname.setText(name);
+        new DownloadImageTask(findViewById(R.id.pokeimage)).execute(url);
 
         //setting Card Number and Rarity
-        Tnumberandrarity = (TextView) findViewById(R.id.numberandrarity);
+        TextView tnumberandrarity = findViewById(R.id.numberandrarity);
         number = intent.getStringExtra("number");
         rarity = intent.getStringExtra("rarity");
-        result = number + " / " + rarity;
-        Tnumberandrarity.setText(result);
+        String result = number + " / " + rarity;
+        tnumberandrarity.setText(result);
 
         //setting Card type, HP, and stage
-        Ttypehpstage = (TextView) findViewById(R.id.typehpstage);
-        type = intent.getStringExtra("types");
-        hp = intent.getStringExtra("hp");
-        stage = intent.getStringExtra("stages");
+        TextView ttypehpstage = findViewById(R.id.typehpstage);
+        String type = intent.getStringExtra("types");
+        String hp = intent.getStringExtra("hp");
+        String stage = intent.getStringExtra("stages");
         result = type + " / " + hp + " / " + stage;
-        Ttypehpstage.setText(result);
+        ttypehpstage.setText(result);
 
         //setting attacks
-        Tattacks = (TextView) findViewById(R.id.attacks);
-        attacks = intent.getStringExtra("attacks");
-        Tattacks.setText(attacks);
+        TextView tattacks = findViewById(R.id.attacks);
+        String attacks = intent.getStringExtra("attacks");
+        tattacks.setText(attacks);
 
         //setting weakness and resistance
-        Tweaknessandresistance = (TextView) findViewById(R.id.weaknessandresistance);
-        weakness = intent.getStringExtra("weakness");
-        resistance = intent.getStringExtra("resistance");
+        TextView tweaknessandresistance = findViewById(R.id.weaknessandresistance);
+        String weakness = intent.getStringExtra("weakness");
+        String resistance = intent.getStringExtra("resistance");
         result = weakness + " / " + resistance;
-        Tweaknessandresistance.setText(result);
+        tweaknessandresistance.setText(result);
 
         //setting prices
         normalprice = intent.getStringExtra("nprice");
@@ -101,28 +99,26 @@ public class CardView extends MainActivity{
         reverseholoprice = intent.getStringExtra("rhprice");
         firsteditionholoprice = intent.getStringExtra("fedhprice");
 
+        TextView tprice;
         if(normalprice != null){
-            Tprice = (TextView) findViewById(R.id.nprice);
-            Tprice.setText(normalprice);
+            tprice = findViewById(R.id.nprice);
+            tprice.setText(normalprice);
         }
 
         if(holoprice != null){
-            Tprice = (TextView) findViewById(R.id.hprice);
-            Tprice.setText(holoprice);
+            tprice = findViewById(R.id.hprice);
+            tprice.setText(holoprice);
         }
 
         if(reverseholoprice != null){
-            Tprice = (TextView) findViewById(R.id.rhprice);
-            Tprice.setText(reverseholoprice);
+            tprice = findViewById(R.id.rhprice);
+            tprice.setText(reverseholoprice);
         }
 
         if(firsteditionholoprice != null){
-            Tprice = (TextView) findViewById(R.id.fedhprice);
-            Tprice.setText(firsteditionholoprice);
+            tprice = findViewById(R.id.fedhprice);
+            tprice.setText(firsteditionholoprice);
         }
-
-
-
     }
 
     //getting the image from url
@@ -139,7 +135,6 @@ public class CardView extends MainActivity{
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
-                Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
             return mIcon11;
@@ -150,49 +145,46 @@ public class CardView extends MainActivity{
         }
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        FirebaseDatabase database;
+        DatabaseReference reference;
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 finish();
                 return true;
             case R.id.addwatchlist:
-                //Create a pokecard
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER);
-                reference.get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DataSnapshot snapshot = task.getResult();
-                        for (DataSnapshot child : snapshot.getChildren()) {
-                            PokeCard card = child.getValue(PokeCard.class);
-                            if (card != null) {
-                                String cid = card.getId();
-                                System.out.println("This is the cid = " + cid);
-                                if (cid.equals(id)) {
-                                    System.out.println("Do i finally get here?");
-                                    //get the pokecard
-                                    selectedCard = card;
-                                    break;
-                                }
-                            }
-                        }
-                    } else {
-                        Log.e("firebase", "Error getting data", task.getException());
-                    }
-                });
+                List<Object> nil = new ArrayList<>();
+                Map<String, Object> prices = new HashMap<>();
+                prices.put("normal", normalprice);
+                prices.put("holofoil", holoprice);
+                prices.put("reverseHolofoil", reverseholoprice);
+                prices.put("1stEditionHolofoil", firsteditionholoprice);
 
-                //adding to watchlist
-                if(selectedCard != null) {
-                    System.out.println("BRO AM I HERE????");
+                PokeCard cardToWatch = new PokeCard(id, name, "nil", rarity, number,
+                        nil, nil, nil, nil, nil, nil, prices);
 
-                //    reference.setValue(selectedCard);
-                }
-                else Toast.makeText(this, "An error has occurred", Toast.LENGTH_LONG).show();
+                database = FirebaseDatabase.getInstance();
+                reference = database.getReference("watchlists").child(MainActivity.CURRENT_USER).child(id);
+                reference.setValue(cardToWatch);
 
-                Toast.makeText(this, "Add to watchlist clicked", Toast.LENGTH_LONG).show();
+                reference.setValue(cardToWatch);
+                Toast.makeText(this, "Card added to watchlist!", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.deleteCard:
+                database = FirebaseDatabase.getInstance();
+                //remove from user's collection
+                reference = database.getReference(MainActivity.CURRENT_USER).child(id);
+                reference.removeValue();
+                // remove from user's watchlist
+                reference = database.getReference("watchlists").child(MainActivity.CURRENT_USER).child(id);
+                reference.removeValue();
+                finish();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + item.getItemId());
         }
         return super.onOptionsItemSelected(item);
     }
@@ -204,10 +196,4 @@ public class CardView extends MainActivity{
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-
-
-
-
-
-
 }

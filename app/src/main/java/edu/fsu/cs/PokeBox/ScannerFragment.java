@@ -80,7 +80,8 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(
                 R.layout.fragment_scanner, container, false);
 
@@ -119,7 +120,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
             DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER).child(selectedCard.getId());
             reference.setValue(selectedCard);
 
-            Toast.makeText(getContext(), "Card Added to Collection!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Card Added to Collection!", Toast.LENGTH_SHORT).show();
             recyclerView.setVisibility(View.INVISIBLE);
             startCamera.setVisibility(View.VISIBLE);
         });
@@ -162,14 +163,16 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "PokeBox Card Scan");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera Fragment");
-        image_uri = Objects.requireNonNull(getContext()).getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        image_uri = Objects.requireNonNull(getContext()).getContentResolver()
+                .insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, CAMERA_LAUNCH_REQUEST);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMS) {
             int check = 0;
@@ -179,7 +182,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
             if (check == 0) {
                 launchCamera();
             } else {
-                Toast.makeText(getContext(), "Some permissions were denied", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Some permissions were denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -225,7 +228,11 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                             do {
                                 tok = tok.substring(0, tok.length() - 1);
                             } while(tok.matches(".*[0-9]+.*"));
-                            tok = tok.substring(0, tok.length() - 1);
+                            try {
+                                tok = tok.substring(0, tok.length() - 1);
+                            } catch(Error e) {
+                                Toast.makeText(getContext(), "Error Processing Card", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         int idx = tok.indexOf("(");
@@ -260,9 +267,18 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                         }
                     }
 
+                    int idx = str.lastIndexOf(" ");
+                    if (idx > -1 && idx != str.length() - 1) {
+                        String tok = str.substring(idx + 1);
+                        if (tok.matches(".*[lwv0-9]+.*")) {
+                            str.delete(idx, str.length());
+                        }
+                    }
+
                     String pokeName = str.toString();
                     if (pokeName.length() == 0) {
-                        Toast.makeText(getContext(), "Unable to extract Pokemon's Name. Try again.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Unable to extract Pokemon's Name. Try again.",
+                                Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -270,7 +286,8 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                     RequestQueue queue = Volley.newRequestQueue(getContext());
                     String url = BASE_URL + pokeName + "\"";
 
-                    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+                    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,
+                            null, response -> {
                         try {
                             int count = response.getInt("count");
                             if (count != 0) {
@@ -330,7 +347,8 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                         attacksArr = pokeObj.getJSONArray("attacks");
                                         for (int j = 0; j < attacksArr.length(); j++) {
                                             JSONObject attack = attacksArr.getJSONObject(j);
-                                            String attackStr = attack.getString("name") + ": " + attack.getString("text");
+                                            String attackStr = attack.getString("name") + ": "
+                                                    + attack.getString("text");
                                             attacks.add(attackStr);
                                         }
                                     } else {
@@ -355,7 +373,8 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                         weaknessesArr = pokeObj.getJSONArray("weaknesses");
                                         for (int j = 0; j < weaknessesArr.length(); j++) {
                                             JSONObject weakness = weaknessesArr.getJSONObject(j);
-                                            String weakText = weakness.getString("type") + " " + weakness.getString("value");
+                                            String weakText = weakness.getString("type") + " "
+                                                    + weakness.getString("value");
                                             weaknesses.add(weakText);
                                         }
                                     } else {
@@ -368,7 +387,8 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                         resistancesArr = pokeObj.getJSONArray("resistances");
                                         for (int j = 0; j < resistancesArr.length(); j++) {
                                             JSONObject resistance = resistancesArr.getJSONObject(j);
-                                            String resistText = resistance.getString("type") + " " + resistance.getString("value");
+                                            String resistText = resistance.getString("type") + " "
+                                                    + resistance.getString("value");
                                             resistances.add(resistText);
                                         }
                                     } else {
@@ -424,14 +444,17 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                                         prices.put("none", 0);
                                     }
 
-                                    PokeCard card = new PokeCard(id, name, hp, rarity, number, attacks, subtypes, weaknesses, resistances, types, evolvesTo, prices);
+                                    PokeCard card = new PokeCard(id, name, hp, rarity, number, attacks, subtypes,
+                                            weaknesses, resistances, types, evolvesTo, prices);
                                     card.setImageUrl(imgUrlStr);
                                     cards.add(card);
 
                                     new DownloadTask().execute(stringToURL(imgUrlStr));
                                 }
                             } else {
-                                Toast.makeText(getContext(), "Unable to find pokemon: " + pokeName, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(),
+                                        "Unable to find pokemon: " + pokeName,
+                                        Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -439,7 +462,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                     }, error -> Log.e("REQUEST ERROR: ", error.toString()));
                     queue.add(request);
                 } else {
-                    Toast.makeText(getContext(), "No Text Found!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "No Text Found!", Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(Throwable::printStackTrace);
         } catch(IOException e) {

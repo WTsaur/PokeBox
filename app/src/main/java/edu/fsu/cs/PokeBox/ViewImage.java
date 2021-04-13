@@ -2,11 +2,11 @@ package edu.fsu.cs.PokeBox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class ViewImage extends CardView{
-    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,24 +16,12 @@ public class ViewImage extends CardView{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        url = intent.getStringExtra("url");
-        System.out.println("this is the url: " + url);
-        new DownloadImageTask((ImageView) findViewById(R.id.imageView)).execute(url);
-
-
+        String url = intent.getStringExtra("url");
+        new DownloadImageTask(findViewById(R.id.imageView)).execute(url);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                finish();
-                return true;
-        }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

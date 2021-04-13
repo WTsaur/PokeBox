@@ -23,6 +23,7 @@ public class PokeCard {
     private final List<Object> resistances;
     private String imageUrl;
     private Map<String, Object> prices;
+
     @Exclude
     private Bitmap imageBitmap;
 
@@ -43,7 +44,10 @@ public class PokeCard {
         this.imageBitmap = null;
     }
 
-    public PokeCard(String id, String name, String hp, String rarity, String number, List<Object> attacks, List<Object> subtypes, List<Object> weaknesses, List<Object> resistances, List<Object> types, List<Object> evolvesTo, Map<String, Object> prices) {
+    public PokeCard(String id, String name, String hp, String rarity, String number,
+                    List<Object> attacks, List<Object> subtypes, List<Object> weaknesses,
+                    List<Object> resistances, List<Object> types, List<Object> evolvesTo,
+                    Map<String, Object> prices) {
         this.id = id;
         this.name = name;
         this.hp = hp;
@@ -92,9 +96,7 @@ public class PokeCard {
         return types;
     }
 
-    public List<Object> getEvolvesTo() {
-        return evolvesTo;
-    }
+    public List<Object> getEvolvesTo() { return evolvesTo; }
 
     @Exclude
     public Bitmap getImageBitmap() { return imageBitmap; }
@@ -113,23 +115,5 @@ public class PokeCard {
 
     public Map<String, Object> getPrices() { return prices; }
 
-    @Exclude
-    public Map<String, Object> toMap() {
-        Map<String, Object> result = new HashMap<>();
-        result.put("id", id);
-        result.put("name", name);
-        result.put("hp", hp);
-        result.put("rarity", rarity);
-        result.put("number", number);
-        result.put("attacks", attacks);
-        result.put("subtypes", subtypes);
-        result.put("weaknesses", weaknesses);
-        result.put("resistances", resistances);
-        result.put("types", types);
-        result.put("evolvesTo", evolvesTo);
-        result.put("imageUrl", imageUrl);
-        result.put("prices", prices);
-        return result;
-    }
-
+    public void setPrices(Map<String, Object> prices) { this.prices = prices; }
 }

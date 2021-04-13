@@ -22,5 +22,11 @@
     <string name="existing_user">Existing User?</string>
     <string name="button_for_searchedittext">button for searchEditText</string>
     <string name="button_for_filtering_card_collection_data">button for filtering card collection data</string>
-    <string name="search">Search...</string>
+    <string name="search">Search…</string>
+    <string name="_1st_ed_reverse_holofoil">1st Edition Reverse Holofoil:</string>
+    <string name="reverse_holofoil">Reverse Holofoil:</string>
+    <string name="holofoil">Holofoil:</string>
+    <string name="normal">Normal:</string>
+    <string name="add_to_watchlist">Add to Watchlist</string>
+    <string name="delete_card">Delete Card</string>
 </resources>

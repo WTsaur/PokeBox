@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     String email =  eemail.getText().toString();
                     String password =  epassword.getText().toString();
                     if (email.isEmpty() || password.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     } else {
                         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
                             new OnCompleteListener<AuthResult>()
@@ -89,20 +89,20 @@ public class MainActivity extends AppCompatActivity {
                                         // if user enters wrong email.
                                         catch (FirebaseAuthInvalidUserException invalidEmail)
                                         {
-                                            Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_SHORT).show();
                                         }
                                         // if user enters wrong password.
                                         catch (FirebaseAuthInvalidCredentialsException wrongPassword)
                                         {
-                                            Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_SHORT).show();
                                         }
                                         catch (Exception e)
                                         {
-                                            Toast.makeText(getApplicationContext(), "Error signing in: " + e, Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Error signing in: " + e, Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     else{
-                                        Toast.makeText(getApplicationContext(), "Successfully signed in", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Successfully signed in", Toast.LENGTH_SHORT).show();
                                         //update ui
                                         load();
                                     }

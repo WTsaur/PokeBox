@@ -41,9 +41,9 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     private ImageButton searchBtn;
     private RecyclerView rv;
 
-    private List<PokeCard> collection = new ArrayList<>();
-    private List<Integer> collectionIdxQueue = new ArrayList<>();
-    private Set<String> cardIds = new HashSet<>();
+    private final List<PokeCard> collection = new ArrayList<>();
+    private final List<Integer> collectionIdxQueue = new ArrayList<>();
+    private final Set<String> cardIds = new HashSet<>();
 
     @Nullable
     @Override
@@ -60,19 +60,35 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         // set up listeners
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER);
-        ValueEventListener valueEventListener = new ValueEventListener() {
+        reference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.e("onDataChange", "data change detected!");
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 loadDataFromDatabase();
+                updateRecyclerView();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                loadDataFromDatabase();
+                updateRecyclerView();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                loadDataFromDatabase();
+                updateRecyclerView();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Log.w("ChildEventListener", "onChildMoved");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("ValueEventListener", "loadPost:onCancelled", error.toException());
+                Log.w("ChildEventListener", "onCancelled", error.toException());
             }
-        };
-        reference.addValueEventListener(valueEventListener);
+        });
 
         searchText.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -106,7 +122,7 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
                                 setCollectionBitMaps();
                             }
                             else{
-                                Toast.makeText(getContext(), "No cards found!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "No cards found!", Toast.LENGTH_SHORT).show();
                             }
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -118,13 +134,13 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
 
             }
             else{
-                Toast.makeText(getContext(), "Cleared!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Cleared!", Toast.LENGTH_SHORT).show();
                 loadDataFromDatabase();
             }
             updateRecyclerView();
         });
 
-        filterBtn.setOnClickListener(v -> Toast.makeText(getContext(), "Filter button clicked!", Toast.LENGTH_LONG).show());
+        filterBtn.setOnClickListener(v -> Toast.makeText(getContext(), "Filter button clicked!", Toast.LENGTH_SHORT).show());
 
         return view;
     }
@@ -193,6 +209,7 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         //load the cardview activity
         Intent intent = new Intent(getActivity(), CardView.class);
         Bundle b = new Bundle();
+        b.putString("id", collection.get(position).getId());
         b.putString("name", collection.get(position).getName());
         b.putString("imageurl", collection.get(position).getImageUrl());
         b.putString("hp", collection.get(position).getHp());
@@ -204,8 +221,8 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         sb.setLength(0);
         //get card type strings
         List<Object> types = collection.get(position).getTypes();
-        for (int i=0; i<types.size(); i++){
-            sb.append((String) types.get(i));
+        for (Object type : types) {
+            sb.append((String) type);
 
         }
         b.putString("types", sb.toString());
@@ -213,8 +230,8 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         sb.setLength(0);
         //get card stage strings
         List<Object> stages = collection.get(position).getSubtypes();
-        for (int i=0; i<stages.size(); i++){
-            sb.append((String) stages.get(i));
+        for (Object stage : stages) {
+            sb.append((String) stage);
 
         }
         b.putString("stages", sb.toString());
@@ -222,8 +239,8 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
 
         //get card attack strings
         List<Object> attacks = collection.get(position).getAttacks();
-        for (int i=0; i<attacks.size(); i++){
-            sb.append((String) attacks.get(i));
+        for (Object attack : attacks) {
+            sb.append((String) attack);
             sb.append("\n");
         }
         b.putString("attacks", sb.toString());
@@ -231,16 +248,16 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
 
         //get card weakness
         List<Object> weakness = collection.get(position).getWeaknesses();
-        for (int i=0; i<weakness.size(); i++){
-            sb.append((String) weakness.get(i));
+        for (Object o : weakness) {
+            sb.append((String) o);
         }
         b.putString("weakness", sb.toString());
         sb.setLength(0);
 
         //get card resistance
         List<Object> resistance = collection.get(position).getResistances();
-        for (int i=0; i<resistance.size(); i++){
-            sb.append((String) resistance.get(i));
+        for (Object o : resistance) {
+            sb.append((String) o);
         }
         b.putString("resistance", sb.toString());
         sb.setLength(0);
@@ -295,15 +312,17 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         }
         // When all async task done
         protected void onPostExecute(Bitmap result){
-            if(result!=null){
-                int idx = collectionIdxQueue.get(0);
-                collectionIdxQueue.remove(0);
-                String txt = "Loading... " + (collection.size() - collectionIdxQueue.size()) + "/" + collection.size();
-                loadingText.setText(txt);
-                collection.get(idx).setImageBitmap(result);
-                if (collectionIdxQueue.size() == 0) {
-                    loadingText.setVisibility(View.INVISIBLE);
-                    updateRecyclerView();
+            if(result != null) {
+                if (!collectionIdxQueue.isEmpty()) {
+                    int idx = collectionIdxQueue.get(0);
+                    collectionIdxQueue.remove(0);
+                    String txt = "Loading... " + (collection.size() - collectionIdxQueue.size()) + "/" + collection.size();
+                    loadingText.setText(txt);
+                    collection.get(idx).setImageBitmap(result);
+                    if (collectionIdxQueue.size() == 0) {
+                        loadingText.setVisibility(View.INVISIBLE);
+                        updateRecyclerView();
+                    }
                 }
             } else {
                 // Notify user that an error occurred while downloading image
