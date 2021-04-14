@@ -272,7 +272,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
                     int idx = str.lastIndexOf(" ");
                     if (idx > -1 && idx != str.length() - 1) {
                         String tok = str.substring(idx + 1);
-                        if (tok.matches(".*[lwv0-9]+.*")) {
+                        if (tok.matches(".*[LlWwVv0-9]+.*")) {
                             str.delete(idx, str.length());
                         }
                     }
