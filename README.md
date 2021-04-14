@@ -56,6 +56,11 @@
 > also displays the pokemon card image. Logout button is also functional now.
 
 ## Progress Report 3
+
+## Account that can be used for testing purposes
+Email: fake@gmail.com
+Password: fake123
+
 ### Contributions
 - William Tsaur
     - Created and designed layout files for Watchlist fragment and watchlist item
