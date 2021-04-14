@@ -14,6 +14,6 @@
     <color name="background_teal">#5AF0F3</color>
     <color name="background_purple">#AA5AF3</color>
     <color name="background_blue">#5AA4F3</color>
-    <color name="light_pale_yellow">#F4E0B1</color>
-    <color name="custom_gray">#4A4A4F</color>
+    <color name="light_pale_yellow">#fff2cc</color>
+    <color name="custom_gray">#434343</color>
 </resources>

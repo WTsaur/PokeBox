@@ -32,8 +32,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="19dp"
             android:textColor="@color/white"
-            android:textColorHint="#F4E0B1"
-            android:backgroundTint="#F4E0B1"
+            android:textColorHint="@color/light_pale_yellow"
+            android:backgroundTint="@color/light_pale_yellow"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/email"
@@ -49,8 +49,8 @@
             android:layout_marginTop="9dp"
             android:ems="10"
             android:textColor="@color/white"
-            android:textColorHint="#F4E0B1"
-            android:backgroundTint="#F4E0B1"
+            android:textColorHint="@color/light_pale_yellow"
+            android:backgroundTint="@color/light_pale_yellow"
             android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:background="#0000"
             android:text="@string/register"
-            android:textColor="#F4E0B1"
+            android:textColor="@color/light_pale_yellow"
             android:textSize="12sp" />
     </LinearLayout>
 

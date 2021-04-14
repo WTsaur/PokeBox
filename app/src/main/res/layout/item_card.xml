@@ -9,7 +9,7 @@
         android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
         android:elevation="12dp"
-        app:cardBackgroundColor="#F4E0B1"
+        app:cardBackgroundColor="@color/light_pale_yellow"
         app:cardCornerRadius="10dp">
     <RelativeLayout
             android:layout_width="wrap_content"
@@ -21,8 +21,8 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_margin="10dp"
-                android:background="#F4E0B1"
-                android:backgroundTint="#F4E0B1"
+                android:background="@color/light_pale_yellow"
+                android:backgroundTint="@color/light_pale_yellow"
                 android:contentDescription="@string/recycler_item_imageView_description"
                 android:elevation="5dp"/>
 

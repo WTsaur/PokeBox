@@ -28,7 +28,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#F4E0B1"
+                app:cardBackgroundColor="@color/light_pale_yellow"
                 android:layout_below="@id/pokeimage"
                 android:layout_centerHorizontal="true">
 
@@ -46,7 +46,7 @@
                         android:textSize="30sp"
                         android:text="Name"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"/>
+                        android:textColor="@color/custom_gray"/>
 
             </RelativeLayout>
 
@@ -59,7 +59,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#F4E0B1"
+                app:cardBackgroundColor="@color/light_pale_yellow"
                 android:layout_below="@id/card_Name">
 
             <RelativeLayout
@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/card_number_rarity"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
             </RelativeLayout>
@@ -96,7 +96,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#F4E0B1"
+                app:cardBackgroundColor="@color/light_pale_yellow"
                 android:layout_below="@id/card_numAndRarity">
 
             <RelativeLayout
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/card_type_hp_stage"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -119,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
             </RelativeLayout>
@@ -133,7 +133,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#F4E0B1"
+                app:cardBackgroundColor="@color/light_pale_yellow"
                 android:layout_below="@id/card_TypeHPStage">
 
             <RelativeLayout
@@ -148,7 +148,7 @@
                         android:text="@string/attacks"
                         android:layout_centerHorizontal="true"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -159,7 +159,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_centerHorizontal="true"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
             </RelativeLayout>
@@ -173,7 +173,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#F4E0B1"
+                app:cardBackgroundColor="@color/light_pale_yellow"
                 android:layout_below="@id/card_Attacks">
 
             <RelativeLayout
@@ -187,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/weakness_resistance"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -196,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:layout_marginStart="10dp"
                         android:textSize="15sp"/>
 
@@ -211,7 +211,7 @@
                 app:cardElevation="8dp"
                 app:cardCornerRadius="15dp"
                 android:layout_margin="6dp"
-                app:cardBackgroundColor="#F4E0B1"
+                app:cardBackgroundColor="@color/light_pale_yellow"
                 android:layout_below="@id/card_WeakResist">
 
             <RelativeLayout
@@ -225,7 +225,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:text="@string/market_prices"/>
 
                 <TextView
@@ -235,7 +235,7 @@
                         android:layout_below="@id/textView_marketPrices"
                         android:text="@string/normal"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
 
@@ -246,7 +246,7 @@
                         android:layout_below="@id/textView_marketPrices"
                         android:layout_toEndOf="@+id/textview4"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:layout_marginStart="10dp"
                         android:textSize="15sp"/>
 
@@ -257,7 +257,7 @@
                         android:layout_below="@id/textview4"
                         android:text="@string/holofoil"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -268,7 +268,7 @@
                         android:layout_toEndOf="@+id/textview5"
                         android:layout_marginStart="10dp"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -278,7 +278,7 @@
                         android:layout_below="@id/textview5"
                         android:text="@string/reverse_holofoil"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -289,7 +289,7 @@
                         android:layout_toEndOf="@+id/textview6"
                         android:layout_marginStart="10dp"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -299,7 +299,7 @@
                         android:layout_below="@+id/textview6"
                         android:text="@string/_1st_edition_holofoil"
                         android:textStyle="bold"
-                        android:textColor="#462E1D"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
                 <TextView
@@ -310,7 +310,7 @@
                         android:layout_toEndOf="@+id/textview7"
                         android:layout_marginStart="10dp"
                         android:textStyle="bold"
-                        android:textColor="#4A4A4F"
+                        android:textColor="@color/custom_gray"
                         android:textSize="15sp"/>
 
             </RelativeLayout>

@@ -98,7 +98,7 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
         selectedCardView = view.findViewById(R.id.selected_card_view);
         load_text = view.findViewById(R.id.loading_text);
 
-        load_text.setTextColor(getResources().getColor(R.color.background_pink));
+        load_text.setTextColor(getResources().getColor(R.color.white));
 
         recyclerView = view.findViewById(R.id.scanner_card_recycler);
 

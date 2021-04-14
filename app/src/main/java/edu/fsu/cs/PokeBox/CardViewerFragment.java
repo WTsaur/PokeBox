@@ -57,7 +57,7 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         loadingText = view.findViewById(R.id.loading_text);
         rv = view.findViewById(R.id.card_viewer_recycler);
 
-        loadingText.setTextColor(getResources().getColor(R.color.background_pink));
+        loadingText.setTextColor(getResources().getColor(R.color.white));
 
         // set up listeners
         FirebaseDatabase database = FirebaseDatabase.getInstance();

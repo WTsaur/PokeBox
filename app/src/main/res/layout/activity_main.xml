@@ -18,7 +18,7 @@
             android:id="@+id/navigation_tabs"
             style="@style/Widget.MaterialComponents.TabLayout.Colored"
             app:tabIndicatorGravity="top"
-            app:tabIndicatorColor="#F4E0B1"
+            app:tabIndicatorColor="@color/light_pale_yellow"
             app:tabIndicatorHeight="7dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
