@@ -37,4 +37,5 @@
     <string name="your_watchlist_is_empty">Your Watchlist Is Empty!</string>
     <string name="filter">Filter</string>
     <string name="clear_filters">Clear Filters</string>
+    <string name="you_have_no_cards_in_your_collection">You have no cards in your collection!</string>
 </resources>

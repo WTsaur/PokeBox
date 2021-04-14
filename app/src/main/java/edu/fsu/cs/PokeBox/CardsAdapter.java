@@ -58,7 +58,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            onCardClickListener.OnCardClick(getAdapterPosition());
+            onCardClickListener.OnCardClick(getAbsoluteAdapterPosition());
         }
     }
 

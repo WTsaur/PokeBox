@@ -122,6 +122,9 @@ public class ScannerFragment extends Fragment implements CardsAdapter.OnCardClic
             DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER).child(selectedCard.getId());
             reference.setValue(selectedCard);
 
+            // send new image bitmap to card viewer fragment
+            CardViewerFragment.newCardImage = selectedCard.getImageBitmap();
+
             Toast.makeText(getContext(), "Card Added to Collection!", Toast.LENGTH_SHORT).show();
             recyclerView.setVisibility(View.INVISIBLE);
             startCamera.setVisibility(View.VISIBLE);

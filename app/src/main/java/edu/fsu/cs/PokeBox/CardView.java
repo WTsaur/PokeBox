@@ -35,6 +35,7 @@ public class CardView extends MainActivity{
     private String holoprice;
     private String reverseholoprice;
     private String firsteditionholoprice;
+    public static Bitmap image;
 
     private final String currency = "$";
 
@@ -52,14 +53,10 @@ public class CardView extends MainActivity{
         Intent intent = getIntent();
         //setting the loading animation for card image
         ImageView pokecardimage = findViewById(R.id.pokeimage);
-        Glide.with(this).load(R.drawable.loading).into(pokecardimage);
-
 
         pokecardimage.setOnClickListener(v -> {
             Intent i = new Intent(getApplication(), ViewImage.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("url", url);
-            i.putExtras(bundle);
+            ViewImage.image = image;
             startActivity(i);
         });
 
@@ -69,7 +66,7 @@ public class CardView extends MainActivity{
         name = intent.getStringExtra("name");
         TextView tname = findViewById(R.id.displayname);
         tname.setText(name);
-        new DownloadImageTask(findViewById(R.id.pokeimage)).execute(url);
+        pokecardimage.setImageBitmap(image);
 
         //setting Card Number and Rarity
         TextView tnumberandrarity = findViewById(R.id.numberandrarity);
@@ -128,30 +125,6 @@ public class CardView extends MainActivity{
             tprice = findViewById(R.id.fedhprice);
             price = currency + firsteditionholoprice;
             tprice.setText(price);
-        }
-    }
-
-    //getting the image from url
-    public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
         }
     }
 

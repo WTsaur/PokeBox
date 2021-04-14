@@ -77,7 +77,7 @@ public class WatchlistFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT) {
-                    int pos = viewHolder.getAdapterPosition();
+                    int pos = viewHolder.getAbsoluteAdapterPosition();
 
                     // remove from user's watchlist
                     String id = watchlist.get(pos).getId();
@@ -136,17 +136,27 @@ public class WatchlistFragment extends Fragment {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                loadDataFromDatabase();
+                if (watchlist.size() == 0) {
+                    loadDataFromDatabase();
+                } else {
+                    PokeCard addedCard = snapshot.getValue(PokeCard.class);
+                    if (addedCard != null) {
+                        watchlist.add(addedCard);
+                        cardIds.add(addedCard.getId());
+                    }
+                    updateRecyclerView();
+                }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 loadDataFromDatabase();
+                updateRecyclerView();
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                loadDataFromDatabase();
+                // Already handled by onSwipe()
             }
 
             @Override

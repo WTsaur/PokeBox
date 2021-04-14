@@ -20,10 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.*;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,6 +33,8 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     private ImageButton searchBtn;
     private RecyclerView rv;
     private TableLayout filterTable;
+    private ImageView errorGhost;
+    private TextView errorText;
 
     private Set<String> activeFilters;
 
@@ -64,12 +63,16 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     private final List<Integer> collectionIdxQueue = new ArrayList<>();
     private final Set<String> cardIds = new HashSet<>();
 
+    public static Bitmap newCardImage = null;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_viewer, container, false);
 
         // instantiate page elements
+        errorGhost = view.findViewById(R.id.error_ghost);
+        errorText = view.findViewById(R.id.error_text);
         searchText = view.findViewById(R.id.searchEditText);
         searchBtn = view.findViewById(R.id.searchBtn);
         filterTable = view.findViewById(R.id.filter_table);
@@ -110,7 +113,18 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                loadDataFromDatabase();
+                if (collection.size() == 0) {
+                    loadDataFromDatabase();
+                } else {
+                    PokeCard addedCard = snapshot.getValue(PokeCard.class);
+                    if (newCardImage != null) {
+                        if (addedCard != null) {
+                            addedCard.setImageBitmap(newCardImage);
+                            collection.add(addedCard);
+                            cardIds.add(addedCard.getId());
+                        }
+                    }
+                }
                 updateRecyclerView();
             }
 
@@ -122,18 +136,28 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                loadDataFromDatabase();
+                PokeCard removedCard = snapshot.getValue(PokeCard.class);
+                String id = removedCard.getId();
+                int pos = 0;
+                for (PokeCard card : collection) {
+                    if (card.getId().equals(id)) {
+                        break;
+                    }
+                    pos++;
+                }
+
+                collection.remove(pos);
                 updateRecyclerView();
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Log.w("ChildEventListener", "onChildMoved");
+                // do nothing
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("ChildEventListener", "onCancelled", error.toException());
+                // do nothing
             }
         });
 
@@ -188,316 +212,261 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
             updateRecyclerView();
         });
 
-        filterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (filterTable.getVisibility() == View.VISIBLE) {
-                    filterTable.setVisibility(View.INVISIBLE);
-                } else {
-                    filterTable.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        submitFilters.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        filterBtn.setOnClickListener(v -> {
+            if (filterTable.getVisibility() == View.VISIBLE) {
                 filterTable.setVisibility(View.INVISIBLE);
+            } else {
+                filterTable.setVisibility(View.VISIBLE);
+            }
+        });
 
-                if(!activeFilters.isEmpty()) {
-                    // filterCatcher "catches" wanted cards
-                    Set<PokeCard> filterCatcher = new HashSet<>();
-                    List<Object> types;
-                    String type;
-                    boolean hasType;
+        submitFilters.setOnClickListener(v -> {
 
-                    for (PokeCard card : collection) {
-                        types = card.getTypes();
-                        hasType = false;
-                        for (Object typeObj : types) {
-                            type = typeObj.toString();
-                            if (activeFilters.contains(type)) {
-                                hasType = true;
-                                break;
-                            }
-                        }
-                        if (!hasType) {
-                            filterCatcher.add(card);
-                        }
-                    }
+            filterTable.setVisibility(View.INVISIBLE);
 
-                    collection.removeAll(filterCatcher);
+            if(!activeFilters.isEmpty()) {
+                // filterCatcher "catches" wanted cards
+                Set<PokeCard> filterCatcher = new HashSet<>();
+                List<Object> types;
+                String type;
+                boolean hasType;
 
-                    for (PokeCard card : filteredCards) {
-                        types = card.getTypes();
-                        hasType = false;
-                        for (Object typeObj : types) {
-                            type = typeObj.toString();
-                            if (activeFilters.contains(type)) {
-                                hasType = true;
-                                break;
-                            }
-                        }
-                        if (!hasType) {
-                            filterCatcher.add(card);
+                for (PokeCard card : collection) {
+                    types = card.getTypes();
+                    hasType = false;
+                    for (Object typeObj : types) {
+                        type = typeObj.toString();
+                        if (activeFilters.contains(type)) {
+                            hasType = true;
+                            break;
                         }
                     }
-
-                    filteredCards.removeAll(filterCatcher);
-                    collection.addAll(filteredCards);
-                    filteredCards.clear();
-                    filteredCards.addAll(filterCatcher);
-
-                } else{
-                    collection.addAll(filteredCards);
-                    filteredCards.clear();
+                    if (!hasType) {
+                        filterCatcher.add(card);
+                    }
                 }
 
-                if (collection.size() == 0) {
-                    Toast.makeText(getContext(), "No cards found!", Toast.LENGTH_SHORT).show();
+                collection.removeAll(filterCatcher);
+
+                for (PokeCard card : filteredCards) {
+                    types = card.getTypes();
+                    hasType = false;
+                    for (Object typeObj : types) {
+                        type = typeObj.toString();
+                        if (activeFilters.contains(type)) {
+                            hasType = true;
+                            break;
+                        }
+                    }
+                    if (!hasType) {
+                        filterCatcher.add(card);
+                    }
                 }
 
-                updateRecyclerView();
+                filteredCards.removeAll(filterCatcher);
+                collection.addAll(filteredCards);
+                filteredCards.clear();
+                filteredCards.addAll(filterCatcher);
+
+            } else{
+                collection.addAll(filteredCards);
+                filteredCards.clear();
+            }
+
+            if (collection.size() == 0) {
+                Toast.makeText(getContext(), "No cards found!", Toast.LENGTH_SHORT).show();
+            }
+
+            updateRecyclerView();
+        });
+
+        clearFilters.setOnClickListener(v -> {
+            bugBtn.setAlpha(1f);
+            darkBtn.setAlpha(1f);
+            dragonBtn.setAlpha(1f);
+            electricBtn.setAlpha(1f);
+            fairyBtn.setAlpha(1f);
+            fightBtn.setAlpha(1f);
+            fireBtn.setAlpha(1f);
+            flyingBtn.setAlpha(1f);
+            ghostBtn.setAlpha(1f);
+            grassBtn.setAlpha(1f);
+            groundBtn.setAlpha(1f);
+            iceBtn.setAlpha(1f);
+            normalBtn.setAlpha(1f);
+            poisonBtn.setAlpha(1f);
+            psychicBtn.setAlpha(1f);
+            rockBtn.setAlpha(1f);
+            steelBtn.setAlpha(1f);
+            waterBtn.setAlpha(1f);
+            colorlessBtn.setAlpha(1f);
+            activeFilters.clear();
+            submitFilters.callOnClick();
+        });
+
+        colorlessBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Colorless");
+            } else {
+                activeFilters.remove("Colorless");
             }
         });
 
-        clearFilters.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bugBtn.setAlpha(1f);
-                darkBtn.setAlpha(1f);
-                dragonBtn.setAlpha(1f);
-                electricBtn.setAlpha(1f);
-                fairyBtn.setAlpha(1f);
-                fightBtn.setAlpha(1f);
-                fireBtn.setAlpha(1f);
-                flyingBtn.setAlpha(1f);
-                ghostBtn.setAlpha(1f);
-                grassBtn.setAlpha(1f);
-                groundBtn.setAlpha(1f);
-                iceBtn.setAlpha(1f);
-                normalBtn.setAlpha(1f);
-                poisonBtn.setAlpha(1f);
-                psychicBtn.setAlpha(1f);
-                rockBtn.setAlpha(1f);
-                steelBtn.setAlpha(1f);
-                waterBtn.setAlpha(1f);
-                colorlessBtn.setAlpha(1f);
-                activeFilters.clear();
+        bugBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Bug");
+            } else {
+                activeFilters.remove("Bug");
             }
         });
 
-        colorlessBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Colorless");
-                } else {
-                    activeFilters.remove("Colorless");
-                }
+        darkBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Dark");
+            } else {
+                activeFilters.remove("Dark");
             }
         });
 
-        bugBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Bug");
-                } else {
-                    activeFilters.remove("Bug");
-                }
+        dragonBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Dragon");
+            } else {
+                activeFilters.remove("Dragon");
             }
         });
 
-        darkBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Dark");
-                } else {
-                    activeFilters.remove("Dark");
-                }
+        electricBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Electric");
+            } else {
+                activeFilters.remove("Electric");
             }
         });
 
-        dragonBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Dragon");
-                } else {
-                    activeFilters.remove("Dragon");
-                }
+        fairyBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Fairy");
+            } else {
+                activeFilters.remove("Fairy");
             }
         });
 
-        electricBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Electric");
-                } else {
-                    activeFilters.remove("Electric");
-                }
+        fightBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Fighting");
+            } else {
+                activeFilters.remove("Fighting");
             }
         });
 
-        fairyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Fairy");
-                } else {
-                    activeFilters.remove("Fairy");
-                }
+        fireBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Fire");
+            } else {
+                activeFilters.remove("Fire");
             }
         });
 
-        fightBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Fighting");
-                } else {
-                    activeFilters.remove("Fighting");
-                }
+        flyingBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Flying");
+            } else {
+                activeFilters.remove("Flying");
             }
         });
 
-        fireBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Fire");
-                } else {
-                    activeFilters.remove("Fire");
-                }
+        ghostBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Ghost");
+            } else {
+                activeFilters.remove("Ghost");
             }
         });
 
-        flyingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Flying");
-                } else {
-                    activeFilters.remove("Flying");
-                }
+        grassBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Grass");
+            } else {
+                activeFilters.remove("Grass");
             }
         });
 
-        ghostBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Ghost");
-                } else {
-                    activeFilters.remove("Ghost");
-                }
+        groundBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Ground");
+            } else {
+                activeFilters.remove("Ground");
             }
         });
 
-        grassBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Grass");
-                } else {
-                    activeFilters.remove("Grass");
-                }
+        iceBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Ice");
+            } else {
+                activeFilters.remove("Ice");
             }
         });
 
-        groundBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Ground");
-                } else {
-                    activeFilters.remove("Ground");
-                }
+        normalBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Normal");
+            } else {
+                activeFilters.remove("Normal");
             }
         });
 
-        iceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Ice");
-                } else {
-                    activeFilters.remove("Ice");
-                }
+        poisonBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Poison");
+            } else {
+                activeFilters.remove("Poison");
             }
         });
 
-        normalBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Normal");
-                } else {
-                    activeFilters.remove("Normal");
-                }
+        psychicBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Psychic");
+            } else {
+                activeFilters.remove("Psychic");
             }
         });
 
-        poisonBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Poison");
-                } else {
-                    activeFilters.remove("Poison");
-                }
+        rockBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Rock");
+            } else {
+                activeFilters.remove("Rock");
             }
         });
 
-        psychicBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Psychic");
-                } else {
-                    activeFilters.remove("Psychic");
-                }
+        steelBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Steel");
+            } else {
+                activeFilters.remove("Steel");
             }
         });
 
-        rockBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Rock");
-                } else {
-                    activeFilters.remove("Rock");
-                }
-            }
-        });
-
-        steelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Steel");
-                } else {
-                    activeFilters.remove("Steel");
-                }
-            }
-        });
-
-        waterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (click(v)) {
-                    activeFilters.add("Water");
-                } else {
-                    activeFilters.remove("Water");
-                }
+        waterBtn.setOnClickListener(v -> {
+            if (click(v)) {
+                activeFilters.add("Water");
+            } else {
+                activeFilters.remove("Water");
             }
         });
 
         return view;
+    }
+
+    public void updateGhost() {
+        if (collection.isEmpty()) {
+            errorGhost.setVisibility(View.VISIBLE);
+            errorText.setVisibility(View.VISIBLE);
+        } else {
+            errorGhost.setVisibility(View.INVISIBLE);
+            errorText.setVisibility(View.INVISIBLE);
+        }
     }
 
     public boolean click(View v) {
@@ -519,9 +488,9 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
     }
 
     public void loadDataFromDatabase() {
-        cardIds.clear();
+//        cardIds.clear();
         collectionIdxQueue.clear();
-        collection.clear();
+//        collection.clear();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(MainActivity.CURRENT_USER);
         reference.get().addOnCompleteListener(task -> {
@@ -558,12 +527,16 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         for (PokeCard card : collection) {
             loadingText.setText(txt);
             // Download Bitmap
-            collectionIdxQueue.add(i++);
-            new DownloadTask().execute(stringToURL(card.getImageUrl()));
+            if (card.getImageBitmap() == null) {
+                collectionIdxQueue.add(i);
+                new DownloadTask().execute(stringToURL(card.getImageUrl()));
+            }
+            i = i + 1;
         }
     }
 
     public void updateRecyclerView() {
+        updateGhost();
         CardsAdapter cardsAdapter = new CardsAdapter(collection, this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         rv.setLayoutManager(gridLayoutManager);
@@ -582,6 +555,8 @@ public class CardViewerFragment extends Fragment implements CardsAdapter.OnCardC
         b.putString("rarity", collection.get(position).getRarity());
         b.putString("number", collection.get(position).getNumber());
         b.putString("id", collection.get(position).getId());
+
+        CardView.image = collection.get(position).getImageBitmap();
 
         StringBuilder sb = new StringBuilder();
         sb.setLength(0);

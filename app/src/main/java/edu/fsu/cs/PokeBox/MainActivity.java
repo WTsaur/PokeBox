@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.watchlist_tab_icon,
             R.drawable.settings_tab_icon
     };
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
