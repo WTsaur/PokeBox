@@ -35,4 +35,6 @@
     <string name="card_number_rarity">Card Number / Rarity:</string>
     <string name="card_type_hp_stage">Card Type / HP / Stage:</string>
     <string name="your_watchlist_is_empty">Your Watchlist Is Empty!</string>
+    <string name="filter">Filter</string>
+    <string name="clear_filters">Clear Filters</string>
 </resources>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
             android:id="@+id/camera_background"
@@ -74,5 +73,238 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"/>
 
+    <TableLayout
+            android:id="@+id/filter_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/filter_table_background"
+            android:layout_below="@id/searchBar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingTop="10dp"
+            android:visibility="invisible">
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_bug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_bug"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_dark"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_dragon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_dragon"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_electric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_electric"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_fairy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_fairy"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_fight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_fighting"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_fire"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_fire"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_flying"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_flying"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_ghost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_ghost"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_grass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_grass"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_ground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_ground"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_ice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_ice"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_normal"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_poison"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_poison"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_psychic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_psychic"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_rock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_rock"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                    android:id="@+id/tag_steel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_steel"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+            <ImageButton
+                    android:id="@+id/tag_water"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tag_water"
+                    android:background="@null"
+                    android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+            android:id="@+id/tag_colorless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_tag_colorless"
+            android:background="@null"
+            android:scaleType="center"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                    android:id="@+id/clearFilters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/clear_filters"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="#D43342"
+                    android:layout_margin="10dp"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+            <Button
+                    android:id="@+id/submitFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="#24B82A"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+        </TableRow>
+
+    </TableLayout>
 
 </RelativeLayout>
