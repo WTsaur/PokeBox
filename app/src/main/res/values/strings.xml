@@ -34,4 +34,5 @@
     <string name="_1st_edition_holofoil">1st Edition Holofoil:</string>
     <string name="card_number_rarity">Card Number / Rarity:</string>
     <string name="card_type_hp_stage">Card Type / HP / Stage:</string>
+    <string name="your_watchlist_is_empty">Your Watchlist Is Empty!</string>
 </resources>

@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -35,6 +37,9 @@ public class WatchlistFragment extends Fragment {
     private RecyclerView watchRV;
     private WatchListAdapter watchListAdapter;
 
+    private ImageView errorGhost;
+    private TextView errorText;
+
     private final List<PokeCard> watchlist = new ArrayList<>();
     private final List<String> cardIds = new ArrayList<>();
 
@@ -48,6 +53,9 @@ public class WatchlistFragment extends Fragment {
 
         swipeRefreshLayout = view.findViewById(R.id.pullToRefresh);
         watchRV = view.findViewById(R.id.watchlist_rv);
+
+        errorGhost = view.findViewById(R.id.error_ghost);
+        errorText = view.findViewById(R.id.error_text);
 
         watchListAdapter = new WatchListAdapter(getContext(), watchlist);
 
@@ -155,6 +163,16 @@ public class WatchlistFragment extends Fragment {
         return view;
     }
 
+    public void updateGhost() {
+        if (watchlist.isEmpty()) {
+            errorGhost.setVisibility(View.VISIBLE);
+            errorText.setVisibility(View.VISIBLE);
+        } else {
+            errorGhost.setVisibility(View.INVISIBLE);
+            errorText.setVisibility(View.INVISIBLE);
+        }
+    }
+
     public void refreshPrices() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -241,6 +259,7 @@ public class WatchlistFragment extends Fragment {
     public void updateRecyclerView() {
         watchListAdapter = new WatchListAdapter(getContext(), watchlist);
         watchRV.setAdapter(watchListAdapter);
+        updateGhost();
     }
 
     public void loadDataFromDatabase() {
