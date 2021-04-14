@@ -65,16 +65,17 @@
     - Created error ghost to let users know if the watchlist is empty or if their card collection is empty
     - Implemented Filter by Pokemon Type
     - Improved Search by Pokemon Name
-    - Performance improvements so that the app pulls data from the database and downloads bitmaps far less often than it needed to; loading exapnded card views and adding and removing cards from watchlist and card collection is faster
+    - Performance improvements so that the app pulls data from the database and downloads bitmaps far less often than it needed to; loading expanded card views and adding and removing cards from watchlist and card collection is faster
     - Re-designed theme and colors across entire application
-    - Re-designed card that displays pokemon information to utilize CardView
+    - Re-designed card that displays Pokemon information to utilize CardView
     - Updated Firebase Database rules to accommodate Watchlists
     - Created powerpoint presentation
     - Created Progress report
 - Tommy Chong
     - Implemented Search by Pokemon name
     - Wrote basic framework for implementing watchlist
-    - Implemented detailed card view that displays pokemon information
+    - Implemented detailed card view that displays Pokemon information
+    - Implemented detailed image view that displays the entire card image in a bigger size
     - Fixed Scroll view error in Card Viewer fragment
     - Implemented Options Menu and Toolbar for detailed card view
     - Created powerpoint presentation
