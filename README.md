@@ -1,5 +1,5 @@
 # PokeBox
-![PokeBox App Icon](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/PokeBox-icon-app.png)
+![PokeBox App Icon](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-icon.png)
 ## Created by William Tsaur and Tommy Chong
 ## Progress Report 1
 ### Contributions
@@ -55,7 +55,7 @@
 > now starts a new activity, which it displays all the information from the pokemon card (Card number, HP, Stage, Attacks, Weaknessess, Resistances, card type). The activity
 > also displays the pokemon card image. Logout button is also functional now.
 
-## Progress Report 3
+## Progress Report 3 (Final)
 
 ## Account that can be used for testing purposes
 Email: fake@gmail.com
@@ -86,6 +86,26 @@ Password: fake123
     - Created powerpoint presentation
 ### Current State of the Application
 > We have fully implemented all pages of the application (Card Scanning, Card Collection, Watchlist, User Registration/Login, User password change). Users can take pictures of cards and save them to their card collection. Users can search their card collection by the name of a Pokemon or they can filter their collection by Pokemon type. They can also view detailed information about each card in their collection and choose to delete the card from their collection or add them to their watchlist. In their watchlist, users can view the prices of their cards (Normal, Holofoil, Reverse Holofoil, and 1st Edition Holofoil). Users can swipe down to refresh the prices on the watchlist or swipe left on a watchlist item to remove it from the watchlist. Users can also change their password, log out of their account and log in to a different account or register for a new account.
+
+#### Login Page
+![login](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-login.jpeg)
+#### Registration Page
+![register](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-register.jpeg)
+#### Camera Page
+![camera](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-scanner.jpeg)
+#### Card Collection Page
+![cards](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-collection-view.jpeg)
+#### Filter Feature
+![filter](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-filter.jpeg)
+#### Detailed Card View
+![cardView](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-card-view.jpeg)
+#### Watchlist Page
+![watchlistDelete](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-watchlist-delete.jpeg)
+![watchlistRefresh](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-watchlist-refresh.jpeg)
+![watchlistEmpty](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-wathclist-empty.jpeg)
+#### Settings Page
+![settings](https://github.com/WTsaur/PokeBox/blob/master/github-Assets/Pokebox-settings.jpeg)
+
 ### Remaining Issues with the Application and Improvements that can be made
 > There are many different card variations of Pokemon cards and we currently do not account for every variation. Our text processing logic is not broad enough to cover all variations. To solve this, we could either improve the text processing logic or replace Google's Firebase ML Kit SDK Text Recognizer with Google's Image Search API to broaden our processing range across all variations and improve accuracy. The application also pulls from the database every time the application is opened is not ideal performance-wise. To improve this we would use SharedPreferences to temporarily store a user's card collection onto their device for easy, fast retrieval at a later time.
 > A feature that can be added in the future is sorting. This would allow users to sort their cards in alphabetical order by name. We could also implement sorting by region and sorting by type.
